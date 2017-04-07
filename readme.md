@@ -1,7 +1,7 @@
 <h1 align="center">ShoutItLouder - Loops</h1>
 
 <p align="center">
-<a href="https://travis-ci.org/ryansolida/loops"><img src="https://travis-ci.org/ryansolida/loops.svg" alt="Build Status"></a>
+<a href="https://travis-ci.org/benlipp/loops"><img src="https://travis-ci.org/benlipp/loops.svg" alt="Build Status"></a>
 </p>
 
 ## Overview
