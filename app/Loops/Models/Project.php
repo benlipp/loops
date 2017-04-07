@@ -26,4 +26,21 @@ class Project extends Model
     {
         return $this->hasMany(Loop::class);
     }
+
+    public static function openLoops()
+    {
+        $projects = Project::all();
+        return $projects->filter(function($project){
+            return $project->hasOpenLoops;
+        })->toArray();
+    }
+
+    public function getHasOpenLoopsAttribute()
+    {
+        foreach ($this->loops as $loop)
+        {
+            if ($loop->status == "Open") return true;
+        }
+        return false;
+    }
 }
