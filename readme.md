@@ -39,5 +39,13 @@ A `vagrant up` should be all you need. Make sure you run `vagrant halt` if you a
 ## Production
 Heroku with a MySQL DB Addon
 
+## Testing
+Run `./vendor/bin/phpunit` from the root.
+
+You can make an alias in your `~/.zshrc` for convenience:
+````
+alias phptest="./vendor/bin/phpunit"
+````
+
 ## License
 All Rights Reserved (until further notice)
