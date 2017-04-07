@@ -8,6 +8,7 @@ class Loop extends Model
 {
 
     protected $fillable = [
-        'name'
+        'name',
+        'assigned_user_id'
     ];
 }

@@ -15,6 +15,9 @@ class CreateLoopsTable extends Migration
     {
         Schema::create('loops', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('project_id')->unsigned();
+            $table->foreign('project_id')->references('id')->on('projects');
+            $table->string('name');
             $table->timestamps();
         });
     }

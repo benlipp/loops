@@ -9,6 +9,7 @@ A task management tool so SIL can see what stuff is pending, and have centralize
 
 ## Local Dev Environment
 ###### Initial Setup
+Run:
 ````
 composer install
 ./vendor/bin/homestead make
@@ -17,11 +18,13 @@ Edit Homestead.yaml file:
   - make sure you set your IP so it doesn't conflict with other VMs
   - set the url (and edit `/etc/hosts` or your DNS configuration as needed)
   
-then:
+then run:
 ````
 cp .env.example .env
 ````
-Make relevant edits to .env, then:
+Make relevant edits to .env.
+
+Finally, run:
 ````
 vagrant up
 php artisan key:generate
@@ -31,7 +34,7 @@ You should be up and running.
 
 ###### Subsequent Runs
 
-A `vagrant up` should be all you need.
+A `vagrant up` should be all you need. Make sure you run `vagrant halt` if you are using multiple machines with the same IP address.
 
 ## Production
 Heroku with a MySQL DB Addon
