@@ -20,6 +20,8 @@ class CreateNotesTable extends Migration
             $table->string('notable_type');
             $table->integer('author_id')->unsigned();
             $table->foreign('author_id')->references('id')->on('users');
+            $table->string('action')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

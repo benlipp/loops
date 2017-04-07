@@ -16,9 +16,21 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'name'           => $faker->name,
+        'email'          => $faker->unique()->safeEmail,
+        'password'       => $password ? : $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(Loops\Models\Project::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->company
+    ];
+});
+
+$factory->define(Loops\Models\Loop::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->bs
     ];
 });
