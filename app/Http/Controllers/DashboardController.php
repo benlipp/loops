@@ -8,9 +8,9 @@ use Loops\Models\Project;
 class DashboardController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::openLoops();
+        $projects = $request->user()->projects()->openLoops()->get();
         return view('dashboard.index', compact('projects'));
     }
 }

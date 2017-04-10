@@ -9,9 +9,7 @@ class Note extends Model
 {
 
     protected $fillable = [
-        'body',
-        'action',
-        'status'
+        'body'
     ];
 
     /**

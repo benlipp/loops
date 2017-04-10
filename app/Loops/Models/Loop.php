@@ -27,20 +27,45 @@ class Loop extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function assignTo($user = null)
+    /**
+     * Add a note to the loop
+     * @param Note|array $note
+     * @param User $author
+     * @return $this
+     */
+    public function addNote(Note $note, User $author)
+    {
+        $note->author()->associate($author);
+        $note->notable()->associate($this);
+        $note->save();
+
+        return $this;
+    }
+
+    /**
+     * Assign the loop to a User
+     * @param User $user
+     * @return $this
+     */
+    public function assignTo(User $user)
     {
         $this->user()->associate($user)->save();
         return $this;
     }
 
-    public function latestNote()
+    public function scopeStatus($query, $status)
     {
-        return $this->notes()->orderBy('updated_at', 'DESC')->first();
+        $query->where('status', $status);
     }
 
-    public function getStatusAttribute()
+    public function scopeOpen($query)
     {
-        return $this->latestNote()->status;
+        return $query->status('open');
+    }
+
+    public function scopeClosed($query)
+    {
+        return $query->status('closed');
     }
 
 

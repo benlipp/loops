@@ -21,18 +21,19 @@ class ProjectsTest extends TestCase
         ];
         $project = Project::create($projectData);
         $this->assertEquals($projectData['name'], $project->name);
+        $this->assertDatabaseHas('projects', $projectData);
     }
 
-    public function testUserProjects()
+    public function testAddRemoveUserProjects()
     {
         $projects = factory(Project::class, 3)->create();
         $user = factory(User::class)->create();
         foreach ($projects as $project)
         {
             $project->addUser($user);
-            $this->assertTrue(is_object($project->users));
+            $this->assertTrue($project->users()->count() == 1);
         }
-        $this->assertTrue(is_object($user->projects));
+        $this->assertTrue($user->projects()->count() == 3);
 
         foreach ($projects as $project)
         {

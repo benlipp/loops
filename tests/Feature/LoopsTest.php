@@ -16,14 +16,17 @@ class LoopsTest extends TestCase
 
     use DatabaseMigrations;
 
-    /**
-     * @dataProvider loopData
-     */
-    public function testCreateLoop($loopData)
+    public function testCreateLoop()
     {
         $project = factory(Project::class)->create();
-        $loop = new Loop($loopData);
-        $loop->project()->associate($project)->save();
+        $loop = factory(Loop::class)->make();
+
+        $project->addLoop($loop);
+
+        $loopData = [
+            'name' => $loop->name,
+            'id' => $loop->id
+        ];
 
         $this->assertDatabaseHas('loops', $loopData);
         $this->assertEquals($loop->project->id, $project->id);
@@ -39,69 +42,15 @@ class LoopsTest extends TestCase
         $this->assertEquals($loop->id, $user->loops()->first()->id);
     }
 
-    /**
-     * @dataProvider notesData
-     */
-    public function testNotes($noteData)
+    public function testLoopAddNote()
     {
         $user = factory(User::class)->create();
         $project = factory(Project::class)->create();
-
-        $this->actingAs($user);
-
         $loop = factory(Loop::class)->make();
-        $loop->project()->associate($project)->save();
-        $loop->assignTo($user);
 
-        $note = new Note($noteData);
-        $note->notable()->associate($loop);
-        $note->author()->associate($user)->save();
-
-        $this->assertDatabaseHas('notes', $noteData);
-        // make sure our status is the status of our most recent note
-        $this->assertEquals($note->status, $loop->status);
+        $project->addLoop($loop)->addUser($user);
+        $noteObj = factory(Note::class)->make();
+        $loop->addNote($noteObj, $user);
+        $this->assertEquals($noteObj->id, $loop->notes()->first()->id);
     }
-
-    public function testUserProjectOpenLoops()
-    {
-        $user = factory(User::class)->create();
-        $project = factory(Project::class)->create();
-    }
-
-    public function loopData()
-    {
-        return [
-            [
-                [
-                    'name' => 'Open Loop Test'
-                ]
-            ],
-            [
-                [
-                    'name' => 'Testing 123'
-                ]
-            ]
-        ];
-    }
-
-    public function notesData()
-    {
-        return [
-            [
-                [
-                    'body'   => '_test_ **markdown** document',
-                    'action' => 'opened',
-                    'status' => 'Open'
-                ]
-            ],
-            [
-                [
-                    'body'   => '_test_ **markdown** document',
-                    'action' => 'closed',
-                    'status' => 'Close'
-                ]
-            ],
-        ];
-    }
-
 }

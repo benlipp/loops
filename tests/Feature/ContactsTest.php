@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Loops\Models\Contact;
+use Loops\Models\Project;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -20,7 +21,7 @@ class ContactsTest extends TestCase
     public function testCreateContact($contactData)
     {
 
-        $project = factory(\Loops\Models\Project::class)->create();
+        $project = factory(Project::class)->create();
         $contact = new Contact($contactData);
         $contact->project()->associate($project)->save();
         $this->assertDatabaseHas('contacts', $contactData);

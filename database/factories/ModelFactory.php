@@ -34,3 +34,10 @@ $factory->define(Loops\Models\Loop::class, function (Faker\Generator $faker) {
         'name' => $faker->bs
     ];
 });
+
+$factory->define(Loops\Models\Note::class, function (Faker\Generator $faker) {
+    return [
+        'body'   => $faker->text(),
+
+    ];
+});
