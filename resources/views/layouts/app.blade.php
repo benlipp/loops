@@ -44,7 +44,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         @if(Auth::check())
-                            <li><a href="{{ route('projects') }}">Projects</a></li>
+                            <li class="@active('projects/?.*')"><a href="{{ route('projects') }}">Projects</a></li>
                         @endif
                     </ul>
 
