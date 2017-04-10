@@ -2,7 +2,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title">New Loop</h4>
             </div>
             <div class="modal-body">
@@ -31,7 +32,8 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Note</label>
-                                <textarea name="note" class="form-control" value="{{ old('note') }}" style="resize: none" rows="5"></textarea>
+                                <textarea name="note" class="form-control" value="{{ old('note') }}"
+                                          style="resize: none" rows="5"></textarea>
                             </div>
                         </div>
                     </div>
@@ -40,8 +42,26 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="document.getElementById('new-loop-form').submit();">Add Loop</button>
+                <button type="button" class="btn btn-primary" onclick="sendForm()">Add Loop</button>
             </div>
         </div>
     </div>
 </div>
+@section('scripts')
+    @parent
+    <script>
+        function sendForm() {
+            $.ajax('/loops', {
+                type: "POST",
+                data: $("#new-loop-form").serialize(),
+                success: function(){
+                    window.location = window.location;
+                },
+                error: function (error) {
+                    alert("Error, see console");
+                    console.log(error.responseJSON);
+                }
+            });
+        }
+    </script>
+@endsection

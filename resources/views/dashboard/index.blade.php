@@ -44,6 +44,7 @@
 @endsection
 
 @section('scripts')
+    @parent
     <script>
         function newLoop(project_id)
         {
