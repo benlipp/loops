@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Loops\Models\Loop;
 use Loops\Models\Note;
+use Loops\Models\Project;
 
 class User extends Authenticatable
 {
@@ -43,5 +44,14 @@ class User extends Authenticatable
     public function loops()
     {
         return $this->hasMany(Loop::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function projects()
+    {
+        //, 'project_user', 'project_id', 'user_id'
+        return $this->belongsToMany(Project::class)->withTimestamps();
     }
 }

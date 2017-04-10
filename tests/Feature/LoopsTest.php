@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use Loops\Models\Loop;
 use Loops\Models\Note;
+use Loops\Models\Project;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -19,7 +21,7 @@ class LoopsTest extends TestCase
      */
     public function testCreateLoop($loopData)
     {
-        $project = factory(\Loops\Models\Project::class)->create();
+        $project = factory(Project::class)->create();
         $loop = new Loop($loopData);
         $loop->project()->associate($project)->save();
 
@@ -29,9 +31,9 @@ class LoopsTest extends TestCase
 
     public function testAssignTo()
     {
-        $user = factory(\App\User::class)->create();
-        $project = factory(\Loops\Models\Project::class)->create();
-        $loop = factory(\Loops\Models\Loop::class)->make();
+        $user = factory(User::class)->create();
+        $project = factory(Project::class)->create();
+        $loop = factory(Loop::class)->make();
         $loop->project()->associate($project)->save();
         $loop->assignTo($user);
         $this->assertEquals($loop->id, $user->loops()->first()->id);
@@ -42,12 +44,12 @@ class LoopsTest extends TestCase
      */
     public function testNotes($noteData)
     {
-        $user = factory(\App\User::class)->create();
-        $project = factory(\Loops\Models\Project::class)->create();
+        $user = factory(User::class)->create();
+        $project = factory(Project::class)->create();
 
         $this->actingAs($user);
 
-        $loop = factory(\Loops\Models\Loop::class)->make();
+        $loop = factory(Loop::class)->make();
         $loop->project()->associate($project)->save();
         $loop->assignTo($user);
 
@@ -58,6 +60,12 @@ class LoopsTest extends TestCase
         $this->assertDatabaseHas('notes', $noteData);
         // make sure our status is the status of our most recent note
         $this->assertEquals($note->status, $loop->status);
+    }
+
+    public function testUserProjectOpenLoops()
+    {
+        $user = factory(User::class)->create();
+        $project = factory(Project::class)->create();
     }
 
     public function loopData()
