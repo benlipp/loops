@@ -7,9 +7,9 @@ use Loops\Models\Project;
 
 class ProjectsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::all();
-        return view('project.index', compact('projects'));
+        $projects = $request->user()->projects;
+        return view('projects.index', compact('projects'));
     }
 }

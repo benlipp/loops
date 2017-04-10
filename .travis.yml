@@ -1,8 +1,11 @@
 language: php
-
 php:
-  - 7.0
-  - 7.1
-
+- 7.0
+- 7.1
 install:
-  - composer install
+- composer install
+deploy:
+  provider: heroku
+  app: sil-loops
+  api_key:
+    secure: rOWZjP78TlpvUS706CN5GA2HIzfaxhs3fJnu0zPuExSRJqVy9A4WYd/fg9i3x0egctJjcnniLw1EkjUkgVbhy2aSEY4D1QkV3guFl8kql/anML2m+xFbSJSILuUXIlt88inkFlaFsm+Y8dXs2fJefvggXFAUOXs8yW7fh/9ENsY20VtFxPusrmDWhP5P6SyJqAZdDcSU8wSDorEpphVje3DCGaHBWpesJmfsvefCOaAFKQNLb8KS+bFw1sqAUibHu2TWxq4iXwECktmyAMAosrOYlfmVrjep2qyizviED49KmkdMmF7lTaQO5kDPq188Q/3bEzRhYdOUTYoo+I+aUtBpvTOYgo9ZECjAsPaRQSq2hju59MYVac5kJgX7i+Uf6XPYk+mvr7/Ui2mdrJ6kTp0fTuW4pevLxNZneKknjQEH9bpBLj0ZeCN5UaMEiTuB++TvlgdK2ikTQSKmU1JPXoVcwnMmPoE3dKfgEg/WAcCp4tGxWglPwXpmYNjPQPwKHB4obrlK8JH6HyorBHAP0tqDFGLnfOTnMR88eFEkuEerzsSJZX/+CSvExWiLkd56v+biN+PplwYvz54yKGuHA8FPJMqZnVnLZ1K86AEJFG/Q/aQRMGdpKtgaGpjiG40REyRt4Ud3NPR2lKd9jhZ07j9i7qNMkxkA9YZL/pvP4Bs=
