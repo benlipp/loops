@@ -4,6 +4,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-loop-modal">New Loop</button>
+                </div>
                 <h2>Open Loops</h2>
                 <br>
             </div>
@@ -27,7 +30,7 @@
                     <img class="img-responsive center-block" src="/images/nothing_to_do_here.png">
                 </div>
             @endif
-
         </div>
     </div>
+    @include('dashboard._new-loop')
 @endsection

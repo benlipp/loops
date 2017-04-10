@@ -53,4 +53,20 @@ class LoopsTest extends TestCase
         $loop->addNote($noteObj, $user);
         $this->assertEquals($noteObj->id, $loop->notes()->first()->id);
     }
+
+    public function testOpenClosed()
+    {
+        $user = factory(User::class)->create();
+        $project = factory(Project::class)->create();
+        $loop = factory(Loop::class)->make();
+        $project->addLoop($loop)->addUser($user);
+        $this->assertDatabaseHas('loops', [
+            'id' => $loop->id,
+            'status' => 'open'
+        ]);
+        $loop->close();
+        $this->assertEquals('closed', $loop->status);
+        $loop->open();
+        $this->assertEquals('open', $loop->status);
+    }
 }

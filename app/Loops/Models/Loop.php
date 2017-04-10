@@ -68,5 +68,29 @@ class Loop extends Model
         return $query->status('closed');
     }
 
+    /**
+     * Open the loop
+     * @return $this
+     */
+    public function open()
+    {
+        $this->status = 'open';
+        $this->save();
+
+        return $this;
+    }
+
+    /**
+     * Close the loop
+     * @return $this
+     */
+    public function close()
+    {
+        $this->status = 'closed';
+        $this->save();
+
+        return $this;
+    }
+
 
 }
