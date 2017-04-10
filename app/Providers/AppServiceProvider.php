@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Schema::defaultStringLength(191);
+        //Schema::defaultStringLength(191); // hack for clearDB
         Blade::directive('active', function ($expression) {
             return "<?php echo active_url($expression); ?>";
         });
