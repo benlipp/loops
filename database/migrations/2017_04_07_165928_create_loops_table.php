@@ -17,7 +17,7 @@ class CreateLoopsTable extends Migration
             $table->increments('id');
             $table->integer('project_id')->unsigned();
             $table->foreign('project_id')->references('id')->on('projects');
-            $table->string('name', 4096);
+            $table->string('name');
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('status')->default('open');

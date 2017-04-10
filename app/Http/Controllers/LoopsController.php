@@ -12,7 +12,7 @@ class LoopsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required',
+            'name' => 'required|max:255',
             'project' => 'required',
             'note' => 'required'
         ]);
