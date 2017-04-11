@@ -25,4 +25,9 @@ class LoopsController extends Controller
         $loop->addNote($note, $request->user());
         return back()->with('status', 'Saved');
     }
+
+    public function show(Loop $loop)
+    {
+        return view('loops.loop', compact('loop'));
+    }
 }

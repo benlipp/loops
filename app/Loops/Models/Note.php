@@ -4,6 +4,7 @@ namespace Loops\Models;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Parsedown;
 
 class Note extends Model
 {
@@ -23,5 +24,12 @@ class Note extends Model
     public function author()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function getDisplayBodyAttribute()
+    {
+        $parsedown = new Parsedown();
+
+        return $parsedown->text($this->attributes['body']);
     }
 }

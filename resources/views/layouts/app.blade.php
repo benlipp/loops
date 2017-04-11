@@ -42,11 +42,7 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        @if(Auth::check())
-                            <li class="@active('projects/?.*')"><a href="{{ route('projects') }}">Projects</a></li>
-                        @endif
-                    </ul>
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -55,6 +51,8 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
+                            <li class="@active('projects/?.*')"><a href="{{ route('projects') }}">Projects</a></li>
+                            <li class="@active('dashboard/?.*') @active('loops/?.*')"><a href="{{ route('dashboard') }}">Loops</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>

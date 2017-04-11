@@ -24,5 +24,13 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('/projects', 'ProjectsController@index')->name('projects');
-    Route::post('/loops', 'LoopsController@store')->name('store-loop');
+
+    Route::group(['prefix' => 'loops'], function (){
+        Route::get('', function (){
+            return redirect('dashboard');
+        });
+        Route::post('', 'LoopsController@store')->name('store-loop');
+        Route::get('{loop}', 'LoopsController@show');
+
+    });
 });

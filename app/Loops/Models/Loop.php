@@ -4,6 +4,7 @@ namespace Loops\Models;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Loops\Traits\HasNotes;
 
 class Loop extends Model
@@ -33,9 +34,9 @@ class Loop extends Model
      * @param User $author
      * @return $this
      */
-    public function addNote(Note $note, User $author)
+    public function addNote(Note $note, User $author = null)
     {
-        $note->author()->associate($author);
+        $note->author()->associate($author ?? Auth::user());
         $note->notable()->associate($this);
         $note->save();
 
@@ -53,27 +54,50 @@ class Loop extends Model
         return $this;
     }
 
+    /**
+     * Scope by Status
+     * @param $query
+     * @param $status
+     */
     public function scopeStatus($query, $status)
     {
         $query->where('status', $status);
     }
 
+    /**
+     * Scope to Open Loops
+     * @param $query
+     * @return mixed
+     */
     public function scopeOpen($query)
     {
         return $query->status('open');
     }
 
+    /**
+     * Scope to Closed Loops
+     * @param $query
+     * @return mixed
+     */
     public function scopeClosed($query)
     {
         return $query->status('closed');
     }
 
+
     /**
-     * Open the loop
+     * Open the loop - with optional note
+     * @param Note|null $note
+     * @param User|null $author
      * @return $this
      */
-    public function open()
+    public function open(Note $note = null, User $author = null)
     {
+        if (isset($note))
+        {
+            $this->addNote($note, $author);
+        }
+
         $this->status = 'open';
         $this->save();
 
@@ -81,16 +105,41 @@ class Loop extends Model
     }
 
     /**
-     * Close the loop
+     * Close the loop - with optional Note
+     * @param Note|null $note
+     * @param User|null $author
      * @return $this
      */
-    public function close()
+    public function close(Note $note = null, User $author = null)
     {
+        if (isset($note))
+        {
+            $this->addNote($note, $author);
+        }
+
         $this->status = 'closed';
         $this->save();
 
         return $this;
     }
 
+    /**
+     * Get the formatted status
+     * @return string
+     */
+    public function getStatusAttribute()
+    {
+        return ucfirst($this->attributes['status']);
+    }
+
+    /**
+     * Get the user who opened the note
+     * @return mixed
+     */
+    public function getOpenedByAttribute()
+    {
+        $firstNote = $this->notes()->orderBy('created_at', 'asc')->first();
+        return $firstNote->author;
+    }
 
 }

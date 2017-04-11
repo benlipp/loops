@@ -54,7 +54,7 @@ class LoopsTest extends TestCase
         $this->assertEquals($noteObj->id, $loop->notes()->first()->id);
     }
 
-    public function testOpenClosed()
+    public function testOpenClose()
     {
         $user = factory(User::class)->create();
         $project = factory(Project::class)->create();
@@ -65,8 +65,64 @@ class LoopsTest extends TestCase
             'status' => 'open'
         ]);
         $loop->close();
-        $this->assertEquals('closed', $loop->status);
+        $this->assertEquals('Closed', $loop->status);
+        $this->assertDatabaseHas('loops', [
+            'id' => $loop->id,
+            'status' => 'closed'
+        ]);
+
         $loop->open();
-        $this->assertEquals('open', $loop->status);
+        $this->assertEquals('Open', $loop->status);
+        $this->assertDatabaseHas('loops', [
+            'id' => $loop->id,
+            'status' => 'open'
+        ]);
     }
+
+    public function testOpenCloseNotes()
+    {
+        $user = factory(User::class)->create();
+        $project = factory(Project::class)->create();
+        $loop = factory(Loop::class)->make();
+        $project->addLoop($loop)->addUser($user);
+        $this->assertDatabaseHas('loops', [
+            'id' => $loop->id,
+            'status' => 'open'
+        ]);
+
+        $closeNote = factory(Note::class)->make();
+        $loop->close($closeNote, $user);
+        $this->assertEquals('Closed', $loop->status);
+        $this->assertTrue($loop->notes()->count() == 1);
+
+        $openNote = factory(Note::class)->make();
+        $loop->open($openNote, $user);
+        $this->assertEquals('Open', $loop->status);
+        $this->assertTrue($loop->notes()->count() == 2);
+    }
+
+    public function testOpenCloseNoteImpliedUser()
+    {
+        $user = factory(User::class)->create();
+        $project = factory(Project::class)->create();
+        $loop = factory(Loop::class)->make();
+        $project->addLoop($loop)->addUser($user);
+        $this->assertDatabaseHas('loops', [
+            'id' => $loop->id,
+            'status' => 'open'
+        ]);
+
+        $this->actingAs($user);
+
+        $closeNote = factory(Note::class)->make();
+        $loop->close($closeNote);
+        $this->assertEquals('Closed', $loop->status);
+        $this->assertTrue($loop->notes()->count() == 1);
+
+        $openNote = factory(Note::class)->make();
+        $loop->open($openNote);
+        $this->assertEquals('Open', $loop->status);
+        $this->assertTrue($loop->notes()->count() == 2);
+    }
+
 }

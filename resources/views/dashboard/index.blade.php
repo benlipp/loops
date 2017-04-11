@@ -27,7 +27,7 @@
                             </div>
                             <div class="panel-body">
                                 @foreach($project->loops()->open()->get() as $l)
-                                    <p><span class="glyphicon glyphicon-refresh"></span> {{ $l->name }}</p>
+                                    <p><a href="/loops/{{ $l->id }}" class="style-link"><span class="glyphicon glyphicon-refresh"></span> {{ $l->name }}</a></p>
                                 @endforeach
                             </div>
                         </div>
