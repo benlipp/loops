@@ -22,7 +22,7 @@ class LoopsController extends Controller
         $note = new Note([
             'body' => $request->note
         ]);
-        $loop->addNote($note, $request->user());
+        $loop->open($note);
         return back()->with('status', 'Saved');
     }
 

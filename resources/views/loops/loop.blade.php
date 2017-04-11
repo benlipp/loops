@@ -35,7 +35,7 @@
                 @foreach($loop->notes as $note)
                     <div class="panel panel-default">
                         <div class="loop-note">
-                            <h2>From: {{ $note->author->name }} <small>{{ $note->created_at->format('F j, Y') }}</small></h2>
+                            <h3>From: {{ $note->author->name }} <small>{{ $note->created_at->format('F j, Y') }}</small></h3>
                             {!! $note->displayBody !!}
                         </div>
                     </div>
