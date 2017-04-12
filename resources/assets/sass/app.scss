@@ -8,34 +8,9 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
-html {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
-}
+// Custom Modifications
+@import "custom";
 
-a.style-link {
-  color: $text-color;
-  text-decoration: underline;
-}
-
-.loop-title {
-  font-weight: 800;
-}
-.panel {
-  box-shadow: none;
-}
-
-div.header-buttons {
-  margin-top: $line-height-computed;
-}
-
-.navbar-brand {
-  font-weight: 600;
-  color: #000000 !important;
-  span.glyphicon {
-    font-size: 75%;
-  }
-}
-
-@import "loops/loop";
-@import "projects/index";
+// Page-specific
+@import "loops/loops";
+@import "projects/projects";

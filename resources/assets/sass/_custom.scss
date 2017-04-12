@@ -1,0 +1,28 @@
+html {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+}
+
+a.style-link {
+  color: $text-color;
+  text-decoration: underline;
+}
+
+.loop-title {
+  font-weight: 800;
+}
+.panel {
+  box-shadow: none;
+}
+
+div.header-buttons {
+  margin-top: $line-height-computed;
+}
+
+.navbar-brand {
+  font-weight: 600;
+  color: #000000 !important;
+  span.glyphicon {
+    font-size: 75%;
+  }
+}
