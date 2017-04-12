@@ -29,8 +29,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('', function (){
             return redirect('dashboard');
         });
-        Route::post('', 'LoopsController@store')->name('store-loop');
-        Route::get('{loop}', 'LoopsController@show');
-
+        Route::post('', 'LoopsController@store')->name('loop-store');
+        Route::get('{loop}', 'LoopsController@show')->name('loop-show');
+        Route::post('{loop}/notes', 'LoopsController@addNote')->name('loop-add-note');
     });
 });

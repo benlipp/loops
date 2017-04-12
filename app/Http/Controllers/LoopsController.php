@@ -16,7 +16,10 @@ class LoopsController extends Controller
             'project' => 'required',
             'note' => 'required'
         ]);
+
+        // TODO: Secure this
         $project = Project::find($request->project);
+
         $loop = new Loop(['name' => $request->name]);
         $project->addLoop($loop);
         $note = new Note([
@@ -28,6 +31,18 @@ class LoopsController extends Controller
 
     public function show(Loop $loop)
     {
-        return view('loops.loop', compact('loop'));
+        return view('loops.loop', ['theLoop' => $loop]);
+    }
+
+    public function addNote(Request $request, Loop $loop)
+    {
+        $this->validate($request, [
+            'note' => 'required'
+        ]);
+        $note = new Note([
+            'body' => $request->note
+        ]);
+        $loop->addNote($note);
+        return back()->with('status', 'Saved');
     }
 }
