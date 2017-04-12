@@ -2,15 +2,19 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="pull-right">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new-loop-modal">New Loop</button>
+        <div class="row loop-header">
+            <div class="col-md-9">
+                <h2 class="loop-title">Open Loops</h2>
+                <span class="loop-description">Some info maybe goes here?</span>
+            </div>
+            <div class="col-md-3">
+                <div class="header-buttons">
+                    <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#new-loop-modal">New Loop</button>
+                    <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#new-loop-modal">New Project</button>
                 </div>
-                <h2>Open Loops</h2>
-                <br>
             </div>
         </div>
+        <div class="row loop-buttons"></div>
         <div class="row">
             @if($projects)
                 @foreach($projects as $project)
@@ -23,7 +27,7 @@
                                         <span class="glyphicon glyphicon-plus"></span>
                                     </button>
                                 </div>
-                                <h2 class="panel-title">{{ $project->name }}</h2>
+                                <h2 class="panel-title"><a href="/projects/{{ $project->id }}" class="style-link">{{ $project->name }}</a></h2>
                             </div>
                             <div class="panel-body">
                                 @foreach($project->loops()->open()->get() as $l)

@@ -5,7 +5,7 @@
         <div class="row loop-header">
             <div class="col-md-8">
                 <h2 class="loop-title">{{ $theLoop->name }}</h2>
-                <ul class="loop-details clearfix">
+                <ul class="loop-details">
                     <li><strong>Client: </strong>Loop Client</li>
                     <li><strong>Agency: </strong>LoopAgency</li>
                     <li><strong>Project: </strong><a class="style-link" href="#">{{ $theLoop->project->name }}</a></li>
