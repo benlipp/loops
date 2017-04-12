@@ -19,7 +19,7 @@ trait HasNotes
 
     /**
      * Add a note to the loop
-     * @param Note|array $note
+     * @param Note $note
      * @param User $author
      * @return $this
      */

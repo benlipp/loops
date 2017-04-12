@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Loops\Models\Contact;
+use Loops\Models\Note;
 use Loops\Models\Project;
 
 class ProjectsController extends Controller
@@ -37,7 +38,9 @@ class ProjectsController extends Controller
         $contact->project()->associate($project)->save();
 
         if ($request->note) {
-            $project->addNote($request->note);
+            $project->addNote(new Note([
+                'body' => $request->note
+            ]));
         }
 
         return back()->with('status', 'Success');
