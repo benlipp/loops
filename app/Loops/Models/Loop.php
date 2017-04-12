@@ -28,21 +28,6 @@ class Loop extends UuidModel
     }
 
     /**
-     * Add a note to the loop
-     * @param Note|array $note
-     * @param User $author
-     * @return $this
-     */
-    public function addNote(Note $note, User $author = null)
-    {
-        $note->author()->associate($author ?? Auth::user());
-        $note->notable()->associate($this);
-        $note->save();
-
-        return $this;
-    }
-
-    /**
      * Assign the loop to a User
      * @param User $user
      * @return $this

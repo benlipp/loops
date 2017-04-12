@@ -8,7 +8,7 @@
                 <ul class="loop-details">
                     <li><strong>Client: </strong>Loop Client</li>
                     <li><strong>Agency: </strong>LoopAgency</li>
-                    <li><strong>Project: </strong><a class="style-link" href="#">{{ $theLoop->project->name }}</a></li>
+                    <li><strong>Project: </strong><a class="style-link" href="/projects/{{ $theLoop->project->id }}">{{ $theLoop->project->name }}</a></li>
                 </ul>
                 <span class="loop-description">
                     Loop description here because things happen sometimes

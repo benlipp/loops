@@ -33,7 +33,7 @@
     @parent
     <script>
         function addNote() {
-            $.ajax('{{ route('loop-add-note', ['loop' => $theLoop->id ]) }}', {
+            $.ajax('{{ route('loop-add-note', ['loop' => $theLoop]) }}', {
                 type: "POST",
                 data: $("#new-note-form").serialize(),
                 success: function(){

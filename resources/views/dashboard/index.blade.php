@@ -30,9 +30,12 @@
                                 <h2 class="panel-title"><a href="/projects/{{ $project->id }}" class="style-link">{{ $project->name }}</a></h2>
                             </div>
                             <div class="panel-body">
-                                @foreach($project->loops()->open()->get() as $l)
-                                    <p><a href="/loops/{{ $l->id }}" class="style-link"><span class="glyphicon glyphicon-refresh"></span> {{ $l->name }}</a></p>
-                                @endforeach
+                                <ul class="project-loops">
+                                    @foreach($project->loops()->open()->get() as $l)
+                                        <li><a href="/loops/{{ $l->id }}" class="style-link"><span class="glyphicon glyphicon-refresh"></span> {{ $l->name }}</a></li>
+                                    @endforeach
+                                </ul>
+
                             </div>
                         </div>
                     </div>

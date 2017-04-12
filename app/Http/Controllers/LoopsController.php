@@ -30,7 +30,7 @@ class LoopsController extends Controller
 
     public function show(Loop $loop)
     {
-        return view('loops.loop', ['theLoop' => $loop]);
+        return view('loops.show', ['theLoop' => $loop]);
     }
 
     public function addNote(Loop $loop, Request $request)

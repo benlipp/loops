@@ -15,7 +15,7 @@ Route::get('/', function () {
     return redirect('/dashboard');
 });
 
-Route::get('/home', function (){
+Route::get('/home', function () {
     return redirect('/dashboard');
 });
 
@@ -23,10 +23,15 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-    Route::get('/projects', 'ProjectsController@index')->name('projects');
 
-    Route::group(['prefix' => 'loops'], function (){
-        Route::get('', function (){
+    Route::group(['prefix' => 'projects'], function () {
+        Route::get('', 'ProjectsController@index')->name('project-index');
+        Route::post('', 'ProjectsController@store')->name('project-store');
+        Route::get('{project}', 'ProjectsController@show')->name('project-show');
+    });
+
+    Route::group(['prefix' => 'loops'], function () {
+        Route::get('', function () {
             return redirect('dashboard');
         });
         Route::post('', 'LoopsController@store')->name('loop-store');
