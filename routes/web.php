@@ -32,5 +32,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('', 'LoopsController@store')->name('loop-store');
         Route::get('{loop}', 'LoopsController@show')->name('loop-show');
         Route::post('{loop}/notes', 'LoopsController@addNote')->name('loop-add-note');
+        Route::post('{loop}/close', 'LoopsController@close')->name('loop-close');
     });
 });

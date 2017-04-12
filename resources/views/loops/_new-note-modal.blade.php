@@ -7,7 +7,7 @@
                 <h4 class="modal-title">New Note</h4>
             </div>
             <div class="modal-body">
-                <form id="new-note-form" action="/notes" method="POST">
+                <form id="new-note-form">
                     {{ csrf_field() }}
                     <input type="hidden" name="loop_id" value="{{ $theLoop->id }}">
                     <div class="row">
@@ -24,7 +24,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="sendForm()">Add Note</button>
+                <button type="button" class="btn btn-primary" onclick="addNote()">Add Note</button>
             </div>
         </div>
     </div>
@@ -32,8 +32,8 @@
 @section('scripts')
     @parent
     <script>
-        function sendForm() {
-            $.ajax('/loops/{{ $theLoop->id }}/notes', {
+        function addNote() {
+            $.ajax('{{ route('loop-add-note', ['loop' => $theLoop->id ]) }}', {
                 type: "POST",
                 data: $("#new-note-form").serialize(),
                 success: function(){

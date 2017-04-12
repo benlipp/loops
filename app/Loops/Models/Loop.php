@@ -141,4 +141,20 @@ class Loop extends UuidModel
         return $firstNote->author;
     }
 
+    /**
+     * @return bool
+     */
+    public function isOpen()
+    {
+        return $this->attributes['status'] === 'open';
+    }
+
+    /**
+     * @return bool
+     */
+    public function isClosed()
+    {
+        return $this->attributes['status'] === 'closed';
+    }
+
 }

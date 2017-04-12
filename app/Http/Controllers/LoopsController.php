@@ -9,23 +9,22 @@ use Loops\Models\Project;
 
 class LoopsController extends Controller
 {
+
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'name' => 'required|max:255',
+        $this->validate($request, [
+            'name'    => 'required|max:255',
             'project' => 'required',
-            'note' => 'required'
+            'note'    => 'required'
         ]);
 
-        // TODO: Secure this
         $project = Project::find($request->project);
-
         $loop = new Loop(['name' => $request->name]);
         $project->addLoop($loop);
-        $note = new Note([
+        $loop->open(new Note([
             'body' => $request->note
-        ]);
-        $loop->open($note);
+        ]));
+
         return back()->with('status', 'Saved');
     }
 
@@ -34,15 +33,29 @@ class LoopsController extends Controller
         return view('loops.loop', ['theLoop' => $loop]);
     }
 
-    public function addNote(Request $request, Loop $loop)
+    public function addNote(Loop $loop, Request $request)
     {
         $this->validate($request, [
             'note' => 'required'
         ]);
-        $note = new Note([
+
+        $loop->addNote(new Note([
             'body' => $request->note
+        ]));
+
+        return back()->with('status', 'Saved');
+    }
+
+    public function close(Loop $loop, Request $request)
+    {
+        $this->validate($request, [
+            'note' => 'required'
         ]);
-        $loop->addNote($note);
+
+        $loop->close(new Note([
+            'body' => $request->note
+        ]));
+
         return back()->with('status', 'Saved');
     }
 }

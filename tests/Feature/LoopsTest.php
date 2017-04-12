@@ -65,6 +65,7 @@ class LoopsTest extends TestCase
             'status' => 'open'
         ]);
         $loop->close();
+        $this->assertTrue($loop->isClosed());
         $this->assertEquals('Closed', $loop->status);
         $this->assertDatabaseHas('loops', [
             'id' => $loop->id,
@@ -73,6 +74,7 @@ class LoopsTest extends TestCase
 
         $loop->open();
         $this->assertEquals('Open', $loop->status);
+        $this->assertTrue($loop->isOpen());
         $this->assertDatabaseHas('loops', [
             'id' => $loop->id,
             'status' => 'open'
@@ -93,11 +95,13 @@ class LoopsTest extends TestCase
         $closeNote = factory(Note::class)->make();
         $loop->close($closeNote, $user);
         $this->assertEquals('Closed', $loop->status);
+        $this->assertTrue($loop->isClosed());
         $this->assertTrue($loop->notes()->count() == 1);
 
         $openNote = factory(Note::class)->make();
         $loop->open($openNote, $user);
         $this->assertEquals('Open', $loop->status);
+        $this->assertTrue($loop->isOpen());
         $this->assertTrue($loop->notes()->count() == 2);
     }
 
@@ -116,11 +120,13 @@ class LoopsTest extends TestCase
 
         $closeNote = factory(Note::class)->make();
         $loop->close($closeNote);
+        $this->assertTrue($loop->isClosed());
         $this->assertEquals('Closed', $loop->status);
         $this->assertTrue($loop->notes()->count() == 1);
 
         $openNote = factory(Note::class)->make();
         $loop->open($openNote);
+        $this->assertTrue($loop->isOpen());
         $this->assertEquals('Open', $loop->status);
         $this->assertTrue($loop->notes()->count() == 2);
     }

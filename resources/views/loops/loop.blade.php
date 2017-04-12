@@ -18,6 +18,7 @@
                 <ul class="loop-status">
                     <li><span>Opened By</span>: <span>{{ $theLoop->openedBy->name }}</span></li>
                     <li><span>On</span>: <span>{{ $theLoop->created_at->format('F j, Y') }}</span></li>
+                    <li><span>At</span>: <span>{{ $theLoop->created_at->format('g:i a') }}</span></li>
                     <li><span>Latest Status</span>: <span><strong>{{ $theLoop->status }}</strong></span></li>
                 </ul>
             </div>
@@ -27,7 +28,11 @@
                 <button class="btn btn-block btn-default" data-toggle="modal" data-target="#new-note-modal">New Note</button>
             </div>
             <div class="col-md-3 col-md-offset-6">
-                <button class="btn btn-block btn-default">Close Loop</button>
+                @if($theLoop->isOpen())
+                    <button class="btn btn-block btn-default" data-toggle="modal" data-target="#close-loop-modal">Close Loop</button>
+                @else
+                    <button class="btn btn-block btn-default" data-toggle="modal" data-target="#open-loop-modal">Open Loop</button>
+                @endif
             </div>
         </div>
         <div class="row">
@@ -35,7 +40,11 @@
                 @foreach($theLoop->notes as $note)
                     <div class="panel panel-default">
                         <div class="loop-note">
-                            <h3>From: {{ $note->author->name }} <small>{{ $note->created_at->format('F j, Y') }}</small></h3>
+                            <h3>From: {{ $note->author->name }}
+                                <small data-toggle="tooltip" data-placement="right" title="{{ $note->created_at->format('g:i:s a, F j, Y') }}">
+                                    {{ $note->created_at->diffForHumans() }}
+                                </small>
+                            </h3>
                             {!! $note->displayBody !!}
                         </div>
                     </div>
@@ -45,4 +54,14 @@
     </div>
 
     @include('loops._new-note-modal')
+    @include('loops._close-loop-modal')
+
+    @section('scripts')
+        @parent
+        <script>
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+        </script>
+    @endsection
 @endsection
