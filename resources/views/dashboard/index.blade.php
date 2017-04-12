@@ -5,12 +5,10 @@
         <div class="row loop-header">
             <div class="col-md-9">
                 <h2 class="loop-title">Open Loops</h2>
-                <span class="loop-description">Some info maybe goes here?</span>
             </div>
             <div class="col-md-3">
                 <div class="header-buttons">
-                    <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#new-loop-modal">New Project</button>
-                    @if(count($projects) >= 1)
+                    @if(count(Auth::user()->projects) >= 1)
                         <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#new-loop-modal">Open a Loop</button>
                     @endif
                 </div>
@@ -18,7 +16,7 @@
         </div>
         <div class="row loop-buttons"></div>
         <div class="row">
-            @if($projects)
+            @if(count($projects) >= 1)
                 @foreach($projects as $project)
                     <div class="col-md-4">
                         <div class="panel panel-default">
@@ -44,7 +42,14 @@
                 @endforeach
             @else
                 <div class="col-md-12">
-                    <img class="img-responsive center-block" src="/images/nothing_to_do_here.png">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">No Open Loops!</h2>
+                        </div>
+                        <div class="panel-body">
+                            <img class="img-responsive center-block" src="/images/nothing_to_do_here.png">
+                        </div>
+                    </div>
                 </div>
             @endif
         </div>

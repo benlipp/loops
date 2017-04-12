@@ -5,7 +5,6 @@
         <div class="row loop-header">
             <div class="col-md-9">
                 <h2 class="loop-title">Projects</h2>
-                <span class="loop-description">Some info maybe goes here?</span>
             </div>
             <div class="col-md-3">
                 <div class="header-buttons">
