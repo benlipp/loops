@@ -87,7 +87,12 @@
                         </h2>
                     </div>
                     <div class="panel-body">
-
+                        @foreach($project->notes as $note)
+                                {!! $note->displayBody !!}
+                            @if(!$loop->last)
+                                <hr>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
             </div>
