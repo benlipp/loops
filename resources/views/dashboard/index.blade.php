@@ -9,8 +9,10 @@
             </div>
             <div class="col-md-3">
                 <div class="header-buttons">
-                    <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#new-loop-modal">New Loop</button>
                     <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#new-loop-modal">New Project</button>
+                    @if(count($projects) >= 1)
+                        <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#new-loop-modal">Open a Loop</button>
+                    @endif
                 </div>
             </div>
         </div>
