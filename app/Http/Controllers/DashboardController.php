@@ -10,7 +10,7 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
-        $projects = $request->user()->projects()->openLoops()->get();
+        $projects = Project::openLoops()->get();//$request->user()->projects()->openLoops()->get();
         return view('dashboard.index', compact('projects'));
     }
 }
