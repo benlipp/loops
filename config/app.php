@@ -226,6 +226,11 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        /*
+         * Custom Aliases
+         */
+        'Uuid' => Webpatser\Uuid\Uuid::class,
+
     ],
 
 ];
