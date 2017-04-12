@@ -14,11 +14,12 @@ class CreateNotesTable extends Migration
     public function up()
     {
         Schema::create('notes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->text('body');
-            $table->integer('notable_id')->unsigned();
+            $table->uuid('notable_id');
             $table->string('notable_type');
-            $table->integer('author_id')->unsigned();
+            $table->uuid('author_id');
             $table->foreign('author_id')->references('id')->on('users');
             $table->timestamps();
         });

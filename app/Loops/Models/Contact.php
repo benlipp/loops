@@ -2,10 +2,9 @@
 
 namespace Loops\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Loops\Traits\HasNotes;
 
-class Contact extends Model
+class Contact extends UuidModel
 {
 
     use HasNotes;

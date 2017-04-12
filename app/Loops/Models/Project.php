@@ -3,10 +3,9 @@
 namespace Loops\Models;
 
 use App\User;
-use Illuminate\Database\Eloquent\Model;
 use Loops\Traits\HasNotes;
 
-class Project extends Model
+class Project extends UuidModel
 {
 
     use HasNotes;

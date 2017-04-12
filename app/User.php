@@ -7,10 +7,22 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Loops\Models\Loop;
 use Loops\Models\Note;
 use Loops\Models\Project;
+use Ramsey\Uuid\Uuid;
 
 class User extends Authenticatable
 {
     use Notifiable;
+
+    public $incrementing = false;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->{$model->getKeyName()} = (string)Uuid::uuid4();
+        });
+    }
 
     /**
      * The attributes that are mass assignable.

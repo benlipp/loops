@@ -3,11 +3,10 @@
 namespace Loops\Models;
 
 use App\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Loops\Traits\HasNotes;
 
-class Loop extends Model
+class Loop extends UuidModel
 {
     use HasNotes;
 

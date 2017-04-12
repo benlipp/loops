@@ -14,11 +14,12 @@ class CreateLoopsTable extends Migration
     public function up()
     {
         Schema::create('loops', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('project_id')->unsigned();
+            $table->uuid('id');
+            $table->primary('id');
+            $table->uuid('project_id');
             $table->foreign('project_id')->references('id')->on('projects');
             $table->string('name');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->uuid('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('status')->default('open');
             $table->timestamps();

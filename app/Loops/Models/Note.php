@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Parsedown;
 
-class Note extends Model
+class Note extends UuidModel
 {
 
     protected $fillable = [

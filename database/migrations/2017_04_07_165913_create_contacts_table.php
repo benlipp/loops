@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateContactsTable extends Migration
 {
+
     /**
      * Run the migrations.
      *
@@ -14,12 +15,13 @@ class CreateContactsTable extends Migration
     public function up()
     {
         Schema::create('contacts', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->string('name');
             $table->string('company')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->integer('project_id')->unsigned()->nullable();
+            $table->uuid('project_id')->nullable();
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('set null');
             $table->timestamps();
         });

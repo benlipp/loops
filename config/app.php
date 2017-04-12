@@ -229,7 +229,6 @@ return [
         /*
          * Custom Aliases
          */
-        'Uuid' => Webpatser\Uuid\Uuid::class,
 
     ],
 
