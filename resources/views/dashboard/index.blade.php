@@ -8,9 +8,9 @@
             </div>
             <div class="col-md-3">
                 <div class="header-buttons">
-                    @if(count(Auth::user()->projects) >= 1)
+                    {{--@if(count(Auth::user()->projects) >= 1)--}}
                         <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#new-loop-modal">Open a Loop</button>
-                    @endif
+                    {{--@endif--}}
                 </div>
             </div>
         </div>
