@@ -25,7 +25,7 @@ class LoopsController extends Controller
             'body' => $request->note
         ]));
 
-        return back()->with('status', 'Saved');
+        return redirect()->route('loop-show', ['loop' => $loop]);
     }
 
     public function show(Loop $loop)

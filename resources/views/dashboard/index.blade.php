@@ -23,7 +23,7 @@
                             <div class="panel-heading clearfix">
                                 <div class="pull-right">
                                     <button class="btn btn-default btn-xs"
-                                            onclick="newLoop({{ $project->id }})">
+                                            onclick="newLoop('{{ $project->id }}')">
                                         <span class="glyphicon glyphicon-plus"></span>
                                     </button>
                                 </div>
