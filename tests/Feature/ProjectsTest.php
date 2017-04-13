@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\User;
+use Loops\Models\Nugget;
 use Loops\Models\Project;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -40,5 +41,18 @@ class ProjectsTest extends TestCase
             $project->removeUser($user);
         }
         $this->assertTrue($user->projects()->count() == 0);
+    }
+
+    public function testAddNugget()
+    {
+        $project = factory(Project::class)->create();
+        $nuggetData = [
+            'name' => 'App URL',
+            'data'=> 'http://loops.dev'
+        ];
+        $nugget = new Nugget($nuggetData);
+        $project->addNugget($nugget);
+        $this->assertDatabaseHas('nuggets', $nuggetData);
+        $this->assertTrue($project->nuggets()->count() == 1);
     }
 }

@@ -10,7 +10,7 @@ trait HasNotes
 {
 
     /**
-     * @return @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function notes()
     {

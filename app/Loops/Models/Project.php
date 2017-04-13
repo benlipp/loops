@@ -4,11 +4,13 @@ namespace Loops\Models;
 
 use App\User;
 use Loops\Traits\HasNotes;
+use Loops\Traits\HasNuggets;
 
 class Project extends UuidModel
 {
 
     use HasNotes;
+    use HasNuggets;
 
     protected $fillable = [
         'name'
