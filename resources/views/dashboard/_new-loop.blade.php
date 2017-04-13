@@ -20,7 +20,8 @@
                             <div class="form-group">
                                 <label>Project</label>
                                 <select name="project" class="form-control">
-                                    @foreach(Auth::user()->projects as $project)
+{{--                                    @foreach(Auth::user()->projects as $project)--}}
+                                    @foreach(\Loops\Models\Project::all() as $project)
                                         <option value="{{ $project->id }}">{{ $project->name }}</option>
                                     @endforeach
                                 </select>
