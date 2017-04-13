@@ -45,7 +45,7 @@ class ProjectsController extends Controller
             ]));
         }
 
-        return redirect()->route('project-show', compact($project));
+        return redirect()->route('project-show', ['project' => $project]);
     }
 
     public function show(Project $project)
