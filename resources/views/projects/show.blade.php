@@ -32,6 +32,12 @@
                     <li><span>Open Loops</span>:<span>{{ $project->loops()->open()->count() }}</span></li>
                     <li><span>Closed Loops</span>:<span>{{ $project->loops()->closed()->count() }}</span></li>
                     <li><span>Created At</span>:<span>{{ $project->created_at->format('F j, Y') }}</span></li>
+                    <li></li>
+                    @if($project->nuggets)
+                        @foreach($project->nuggets as $nugget)
+                            <li><span>{{ $nugget->name }}</span>:<span>{{ $nugget->data }}</span></li>
+                        @endforeach
+                    @endif
                 </ul>
             </div>
         </div>

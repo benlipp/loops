@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Loops\Models\Contact;
 use Loops\Models\Note;
+use Loops\Models\Nugget;
 use Loops\Models\Project;
 
 class ProjectsController extends Controller
@@ -32,7 +33,7 @@ class ProjectsController extends Controller
         ]);
 
         $project->save();
-        // TODO: this feels like a security flaw, (on update) we should check if the project already exists first...
+        // TODO: this feels like a security flaw (on update), we should check if the project already exists first, and only addUser() on new project
         $project->addUser($request->user());
         $contact = new Contact($request->contact);
         $contact->project()->associate($project)->save();
@@ -41,6 +42,19 @@ class ProjectsController extends Controller
             $project->addNote(new Note([
                 'body' => $request->note
             ]));
+        }
+
+        if ($request->info) {
+            $info = explode("\n", $request->info);
+            foreach ($info as $line) {
+                $data = explode('=', $line);
+                $nugget = new Nugget([
+                    'name' => $data[0],
+                    'data' => $data[1]
+                ]);
+
+                $project->addNugget($nugget);
+            }
         }
 
         return back()->with('status', 'Success');
