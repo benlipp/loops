@@ -20,12 +20,6 @@
                     <div class="col-md-4">
                         <div class="panel panel-default">
                             <div class="panel-heading clearfix">
-                                <div class="pull-right">
-                                    <button class="btn btn-default btn-xs"
-                                            onclick="newLoop({{ $project->id }})">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                    </button>
-                                </div>
                                 <h2 class="panel-title"><a href="/projects/{{ $project->id }}" class="style-link">{{ $project->name }}</a></h2>
                             </div>
                             <div class="panel-body">
@@ -43,7 +37,7 @@
                                         <span class="project-loop-status">Closed Loops:</span>
                                         <ul class="project-loops">
                                             @foreach($project->loops()->closed()->get() as $l)
-                                                <li><a href="/loops/{{ $l->id }}" class="style-link"> {{ $l->name }}</a></li>
+                                                <li><a href="/loops/{{ $l->id }}" class="style-link">{{ $l->name }}</a></li>
                                             @endforeach
                                         </ul>
                                     @endif

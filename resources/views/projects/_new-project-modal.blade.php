@@ -40,15 +40,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Info <small style="font-weight: 200">Key=Value separated by newlines</small></label>
-                                <textarea name="info" class="form-control" value="{{ old('info') }}"
-                                          style="resize: none" rows="8" placeholder="{{ "App Url=http://loops.dev\nTesting=123" }}"></textarea>
-                            </div>
-                        </div>
-                    </div>
                 </form>
             </div>
 
@@ -67,7 +58,7 @@
                 type: "POST",
                 data: $("#new-project-form").serialize(),
                 success: function(){
-                    window.location = window.location;
+                    console.log('success');
                 },
                 error: function (error) {
                     alert("Error, see console");

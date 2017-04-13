@@ -32,13 +32,19 @@
                     <li><span>Open Loops</span>:<span>{{ $project->loops()->open()->count() }}</span></li>
                     <li><span>Closed Loops</span>:<span>{{ $project->loops()->closed()->count() }}</span></li>
                     <li><span>Created At</span>:<span>{{ $project->created_at->format('F j, Y') }}</span></li>
-                    <li></li>
-                    @if($project->nuggets)
-                        @foreach($project->nuggets as $nugget)
-                            <li><span>{{ $nugget->name }}</span>:<span>{{ $nugget->data }}</span></li>
-                        @endforeach
-                    @endif
                 </ul>
+            </div>
+        </div>
+        <div class="row nuggets">
+            <div class="col-md-12">
+                @if($project->nuggets)
+                    <ul class="nugget-group">
+                        @foreach($project->nuggets as $nugget)
+                            <li><span class="nugget-name">{{ $nugget->name }} </span>{{ $nugget->data }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+                <a href="#" data-toggle="modal" data-target="#nugget-modal"><span class="glyphicon glyphicon-plus"></span> New Nugget</a>
             </div>
         </div>
         <div class="row loop-buttons">
@@ -86,31 +92,29 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h2 class="panel-title">
-                            Notes
-                        </h2>
+                @foreach($project->notes as $note)
+                    <div class="panel panel-default">
+                        <div class="loop-note">
+                            <h3>From: {{ $note->author->name }}
+                                <small data-toggle="tooltip" data-placement="right" title="{{ $note->created_at->format('g:i:s a, F j, Y') }}">
+                                    {{ $note->created_at->diffForHumans() }}
+                                </small>
+                            </h3>
+                            {!! $note->displayBody !!}
+                        </div>
                     </div>
-                    <div class="panel-body">
-                        @foreach($project->notes as $note)
-                                {!! $note->displayBody !!}
-                            @if(!$loop->last)
-                                <hr>
-                            @endif
-                        @endforeach
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
+    @include('projects._nugget-modal')
+@endsection
 
-    @section('scripts')
-        @parent
-        <script>
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip()
-            })
-        </script>
-    @endsection
+@section('scripts')
+    @parent
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
 @endsection

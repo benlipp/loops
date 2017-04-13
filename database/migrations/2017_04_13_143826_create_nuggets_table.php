@@ -20,7 +20,7 @@ class CreateNuggetsTable extends Migration
             $table->uuid('nuggetable_id');
             $table->integer('sort_order')->nullable();
             $table->string('name')->nullable();
-            $table->string('data')->nullable();
+            $table->string('data', 4096)->nullable();
             $table->timestamps();
         });
     }

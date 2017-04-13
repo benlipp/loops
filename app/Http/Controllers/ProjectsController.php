@@ -31,10 +31,11 @@ class ProjectsController extends Controller
         $project = new Project([
             'name' => $request->name
         ]);
-
         $project->save();
+
         // TODO: this feels like a security flaw (on update), we should check if the project already exists first, and only addUser() on new project
         $project->addUser($request->user());
+
         $contact = new Contact($request->contact);
         $contact->project()->associate($project)->save();
 
@@ -44,24 +45,26 @@ class ProjectsController extends Controller
             ]));
         }
 
-        if ($request->info) {
-            $info = explode("\n", $request->info);
-            foreach ($info as $line) {
-                $data = explode('=', $line);
-                $nugget = new Nugget([
-                    'name' => $data[0],
-                    'data' => $data[1]
-                ]);
-
-                $project->addNugget($nugget);
-            }
-        }
-
-        return back()->with('status', 'Success');
+        return redirect()->route('project-show', compact($project));
     }
 
     public function show(Project $project)
     {
         return view('projects.show', compact('project'));
+    }
+
+    public function addNugget(Project $project, Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'data' => 'required'
+        ]);
+        $nugget = new Nugget([
+            'name' => $request->name,
+            'data' => $request->data
+        ]);
+        $project->addNugget($nugget);
+
+        return response()->json('');
     }
 }
