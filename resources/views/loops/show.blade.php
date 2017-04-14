@@ -92,7 +92,7 @@
             $('[data-toggle="tooltip"]').tooltip();
             $("#user-select").on('change', function () {
                 var user = $(this).val();
-                console.log('User changed to: ' + user);
+                console.log('(example) User change to: ' + user);
 
                 {{--$.ajax('{{ route('loop-assign-user', ['loop' => $theLoop]) }}', {--}}
                     {{--type: "POST",--}}
