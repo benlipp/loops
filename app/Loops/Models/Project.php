@@ -3,12 +3,13 @@
 namespace Loops\Models;
 
 use App\User;
+use Loops\Traits\HasContacts;
 use Loops\Traits\HasNotes;
 use Loops\Traits\HasNuggets;
 
 class Project extends UuidModel
 {
-
+    use HasContacts;
     use HasNotes;
     use HasNuggets;
 
@@ -16,13 +17,6 @@ class Project extends UuidModel
         'name'
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function contacts()
-    {
-        return $this->hasMany(Contact::class);
-    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
