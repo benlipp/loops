@@ -10,13 +10,24 @@
                 <form id="new-project-form">
                     {{ csrf_field() }}
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label>Name</label>
                                 <input name="name" type="text" class="form-control" value="{{ old('name') }}">
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Team</label>
+                                <select name="team" class="form-control">
+                                    @foreach(\Auth::user()->teams as $team)
+                                        <option value="{{ $team->id }}">{{ $team->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
+                    <hr>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
