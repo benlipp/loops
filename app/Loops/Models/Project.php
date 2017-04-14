@@ -33,11 +33,11 @@ class Project extends UuidModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function users()
+    public function team()
     {
-        return $this->belongsToMany(User::class)->withTimestamps();
+        return $this->belongsTo(Team::class);
     }
 
     /**
@@ -65,27 +65,5 @@ class Project extends UuidModel
         return $this;
     }
 
-    /**
-     * Add a user to the project
-     * @param User $user
-     * @return $this
-     */
-    public function addUser(User $user)
-    {
-        $this->users()->attach($user);
 
-        return $this;
-    }
-
-    /**
-     * Remove a user from the project
-     * @param User $user
-     * @return $this
-     */
-    public function removeUser(User $user)
-    {
-        $this->users()->detach($user);
-
-        return $this;
-    }
 }

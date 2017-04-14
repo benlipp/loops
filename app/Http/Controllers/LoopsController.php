@@ -74,4 +74,9 @@ class LoopsController extends Controller
 
         return response()->json('');
     }
+
+    public function assignUser(Loop $loop, Request $request)
+    {
+        
+    }
 }

@@ -4,9 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContactsTable extends Migration
+class CreateTeamsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -14,15 +13,10 @@ class CreateContactsTable extends Migration
      */
     public function up()
     {
-        Schema::create('contacts', function (Blueprint $table) {
+        Schema::create('teams', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
             $table->string('name');
-            $table->string('company')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
-            $table->uuid('contactable_id')->nullable();
-            $table->string('contactable_type')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +28,6 @@ class CreateContactsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contacts');
+        Schema::dropIfExists('teams');
     }
 }

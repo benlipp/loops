@@ -23,9 +23,24 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(Loops\Models\Project::class, function (Faker\Generator $faker) {
+$factory->define(Loops\Models\Team::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->company
+    ];
+});
+
+$factory->define(Loops\Models\Project::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->domainName
+    ];
+});
+
+$factory->define(Loops\Models\Contact::class, function (Faker\Generator $faker) {
+    return [
+            'name'    => $faker->name,
+            'company' => $faker->company,
+            'email'   => $faker->email,
+            'phone'   => $faker->phoneNumber
     ];
 });
 
@@ -37,7 +52,6 @@ $factory->define(Loops\Models\Loop::class, function (Faker\Generator $faker) {
 
 $factory->define(Loops\Models\Note::class, function (Faker\Generator $faker) {
     return [
-        'body'   => $faker->text(),
-
+        'body' => $faker->text(),
     ];
 });

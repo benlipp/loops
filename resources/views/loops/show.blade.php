@@ -8,7 +8,9 @@
                 <ul class="loop-details">
                     <li><strong>Client: </strong>Loop Client</li>
                     <li><strong>Agency: </strong>LoopAgency</li>
-                    <li><strong>Project: </strong><a class="style-link" href="/projects/{{ $theLoop->project->id }}">{{ $theLoop->project->name }}</a></li>
+                    <li><strong>Project: </strong><a class="style-link"
+                                                     href="/projects/{{ $theLoop->project->id }}">{{ $theLoop->project->name }}</a>
+                    </li>
                 </ul>
                 <span class="loop-description">
                     Loop description here because things happen sometimes
@@ -20,6 +22,18 @@
                     <li><span>On</span>: <span>{{ $theLoop->created_at->format('F j, Y') }}</span></li>
                     <li><span>At</span>: <span>{{ $theLoop->created_at->format('g:i a') }}</span></li>
                     <li><span>Latest Status</span>: <span><strong>{{ $theLoop->status }}</strong></span></li>
+                    <li>&nbsp;</li>
+                    <li>
+                        <span>Assigned To</span>:
+                        <span>
+                            <select class="form-control" id="user-select">
+                                <option value="">Nobody</option>
+                                @foreach(\App\User::all() as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
+                        </span>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -32,18 +46,24 @@
                         @endforeach
                     </ul>
                 @endif
-                <a href="#" data-toggle="modal" data-target="#nugget-modal"><span class="glyphicon glyphicon-plus"></span> New Nugget</a>
+                <a href="#" data-toggle="modal" data-target="#nugget-modal"><span
+                            class="glyphicon glyphicon-plus"></span> New Nugget</a>
             </div>
         </div>
         <div class="row loop-buttons">
             <div class="col-md-3">
-                <button class="btn btn-block btn-default" data-toggle="modal" data-target="#new-note-modal">New Note</button>
+                <button class="btn btn-block btn-default" data-toggle="modal" data-target="#new-note-modal">New Note
+                </button>
             </div>
             <div class="col-md-3 col-md-offset-6">
                 @if($theLoop->isOpen())
-                    <button class="btn btn-block btn-default" data-toggle="modal" data-target="#close-loop-modal">Close Loop</button>
+                    <button class="btn btn-block btn-default" data-toggle="modal" data-target="#close-loop-modal">Close
+                        Loop
+                    </button>
                 @else
-                    <button class="btn btn-block btn-default" data-toggle="modal" data-target="#open-loop-modal">Open Loop</button>
+                    <button class="btn btn-block btn-default" data-toggle="modal" data-target="#open-loop-modal">Open
+                        Loop
+                    </button>
                 @endif
             </div>
         </div>
@@ -53,7 +73,8 @@
                     <div class="panel panel-default">
                         <div class="loop-note">
                             <h3>From: {{ $note->author->name }}
-                                <small data-toggle="tooltip" data-placement="right" title="{{ $note->created_at->format('g:i:s a, F j, Y') }}">
+                                <small data-toggle="tooltip" data-placement="right"
+                                       title="{{ $note->created_at->format('g:i:s a, F j, Y') }}">
                                     {{ $note->created_at->diffForHumans() }}
                                 </small>
                             </h3>
@@ -69,12 +90,27 @@
     @include('loops._close-loop-modal')
     @include('loops._nugget-modal')
 
-    @section('scripts')
-        @parent
-        <script>
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip()
-            })
-        </script>
-    @endsection
+@section('scripts')
+    @parent
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            {{--$("#user-select").on('change', function () {--}}
+                {{--var user = $(this).val();--}}
+                {{--$.ajax('{{ route('loop-assign-user', ['loop' => $theLoop]) }}', {--}}
+                    {{--type: "POST",--}}
+                    {{--data: { "user" :user},--}}
+                    {{--success: function () {--}}
+                        {{--console.log('success');--}}
+                        {{--alert('User saved.');--}}
+                    {{--},--}}
+                    {{--error: function (error) {--}}
+                        {{--alert("Error, see console");--}}
+                        {{--console.log(error.responseJSON);--}}
+                    {{--}--}}
+                {{--});--}}
+            {{--});--}}
+        });
+    </script>
+@endsection
 @endsection

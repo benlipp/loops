@@ -16,8 +16,11 @@ class CreateProjectsTable extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
-
             $table->string('name');
+            $table->uuid('team_id');
+            $table->foreign('team_id')->references('id')->on('teams');
+            $table->uuid('agency_id')->nullable();
+            $table->foreign('agency_id')->references('id')->on('agencies');
             $table->timestamps();
         });
     }

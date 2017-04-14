@@ -7,10 +7,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Loops\Models\Loop;
 use Loops\Models\Note;
 use Loops\Models\Project;
+use Loops\Models\Team;
 use Ramsey\Uuid\Uuid;
 
 class User extends Authenticatable
 {
+
     use Notifiable;
 
     public $incrementing = false;
@@ -30,7 +32,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
     ];
 
     /**
@@ -39,7 +43,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -51,6 +56,14 @@ class User extends Authenticatable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class)->withPivot('admin')->withTimestamps();
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function loops()
@@ -59,11 +72,13 @@ class User extends Authenticatable
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @param null $team_id
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
-    public function projects()
+    public function projectsByTeam($team_id)
     {
-        //, 'project_user', 'project_id', 'user_id'
-        return $this->belongsToMany(Project::class)->withTimestamps();
+        $team = $this->teams()->where('team_id', $team_id)->first();
+        return $team->projects();
     }
+
 }

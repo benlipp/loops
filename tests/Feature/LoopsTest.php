@@ -7,6 +7,7 @@ use Loops\Models\Loop;
 use Loops\Models\Note;
 use Loops\Models\Nugget;
 use Loops\Models\Project;
+use Loops\Models\Team;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -14,70 +15,65 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class LoopsTest extends TestCase
 {
-
     use DatabaseMigrations;
+
+    protected $team;
+    protected $project;
+    protected $loop;
+
+    public function setUp()
+    {
+        parent::setUp();
+        $this->team = factory(Team::class)->create();
+        $this->project = factory(Project::class)->make();
+        $this->team->addProject($this->project);
+
+        $this->loop = factory(Loop::class)->make();
+        $this->project->addLoop($this->loop);
+    }
 
     public function testCreateLoop()
     {
-        $project = factory(Project::class)->create();
-        $loop = factory(Loop::class)->make();
-
-        $project->addLoop($loop);
-
         $loopData = [
-            'name' => $loop->name,
-            'id'   => $loop->id
+            'name' => $this->loop->name,
+            'id'   => $this->loop->id
         ];
 
         $this->assertDatabaseHas('loops', $loopData);
-        $this->assertEquals($loop->project->id, $project->id);
+        $this->assertEquals($this->loop->project->id, $this->project->id);
     }
 
     public function testAssignTo()
     {
         $user = factory(User::class)->create();
-        $project = factory(Project::class)->create();
-        $loop = factory(Loop::class)->make();
-        $loop->project()->associate($project)->save();
-        $loop->assignTo($user);
-        $this->assertEquals($loop->id, $user->loops()->first()->id);
+        $this->loop->assignTo($user);
+        $this->assertEquals($this->loop->id, $user->loops()->first()->id);
     }
 
     public function testLoopAddNote()
     {
         $user = factory(User::class)->create();
-        $project = factory(Project::class)->create();
-        $loop = factory(Loop::class)->make();
 
-        $project->addLoop($loop)->addUser($user);
         $noteObj = factory(Note::class)->make();
-        $loop->addNote($noteObj, $user);
-        $this->assertEquals($noteObj->id, $loop->notes()->first()->id);
+        $this->loop->addNote($noteObj, $user);
+        $this->assertEquals($noteObj->id, $this->loop->notes()->first()->id);
     }
 
     public function testOpenClose()
     {
-        $user = factory(User::class)->create();
-        $project = factory(Project::class)->create();
-        $loop = factory(Loop::class)->make();
-        $project->addLoop($loop)->addUser($user);
+        $this->loop->close();
+        $this->assertTrue($this->loop->isClosed());
+        $this->assertEquals('Closed', $this->loop->status);
         $this->assertDatabaseHas('loops', [
-            'id'     => $loop->id,
-            'status' => 'open'
-        ]);
-        $loop->close();
-        $this->assertTrue($loop->isClosed());
-        $this->assertEquals('Closed', $loop->status);
-        $this->assertDatabaseHas('loops', [
-            'id'     => $loop->id,
+            'id'     => $this->loop->id,
             'status' => 'closed'
         ]);
 
-        $loop->open();
-        $this->assertEquals('Open', $loop->status);
-        $this->assertTrue($loop->isOpen());
+        $this->loop->open();
+        $this->assertEquals('Open', $this->loop->status);
+        $this->assertTrue($this->loop->isOpen());
         $this->assertDatabaseHas('loops', [
-            'id'     => $loop->id,
+            'id'     => $this->loop->id,
             'status' => 'open'
         ]);
     }
@@ -85,67 +81,48 @@ class LoopsTest extends TestCase
     public function testOpenCloseNotes()
     {
         $user = factory(User::class)->create();
-        $project = factory(Project::class)->create();
-        $loop = factory(Loop::class)->make();
-        $project->addLoop($loop)->addUser($user);
-        $this->assertDatabaseHas('loops', [
-            'id'     => $loop->id,
-            'status' => 'open'
-        ]);
-
         $closeNote = factory(Note::class)->make();
-        $loop->close($closeNote, $user);
-        $this->assertEquals('Closed', $loop->status);
-        $this->assertTrue($loop->isClosed());
-        $this->assertTrue($loop->notes()->count() == 1);
+        $this->loop->close($closeNote, $user);
+        $this->assertEquals('Closed', $this->loop->status);
+        $this->assertTrue($this->loop->isClosed());
+        $this->assertTrue($this->loop->notes()->count() == 1);
 
         $openNote = factory(Note::class)->make();
-        $loop->open($openNote, $user);
-        $this->assertEquals('Open', $loop->status);
-        $this->assertTrue($loop->isOpen());
-        $this->assertTrue($loop->notes()->count() == 2);
+        $this->loop->open($openNote, $user);
+        $this->assertEquals('Open', $this->loop->status);
+        $this->assertTrue($this->loop->isOpen());
+        $this->assertTrue($this->loop->notes()->count() == 2);
     }
 
     public function testOpenCloseNoteImpliedUser()
     {
         $user = factory(User::class)->create();
-        $project = factory(Project::class)->create();
-        $loop = factory(Loop::class)->make();
-        $project->addLoop($loop)->addUser($user);
-        $this->assertDatabaseHas('loops', [
-            'id'     => $loop->id,
-            'status' => 'open'
-        ]);
 
         $this->actingAs($user);
 
         $closeNote = factory(Note::class)->make();
-        $loop->close($closeNote);
-        $this->assertTrue($loop->isClosed());
-        $this->assertEquals('Closed', $loop->status);
-        $this->assertTrue($loop->notes()->count() == 1);
+        $this->loop->close($closeNote);
+        $this->assertTrue($this->loop->isClosed());
+        $this->assertEquals('Closed', $this->loop->status);
+        $this->assertTrue($this->loop->notes()->count() == 1);
 
         $openNote = factory(Note::class)->make();
-        $loop->open($openNote);
-        $this->assertTrue($loop->isOpen());
-        $this->assertEquals('Open', $loop->status);
-        $this->assertTrue($loop->notes()->count() == 2);
+        $this->loop->open($openNote);
+        $this->assertTrue($this->loop->isOpen());
+        $this->assertEquals('Open', $this->loop->status);
+        $this->assertTrue($this->loop->notes()->count() == 2);
     }
 
     public function testAddNugget()
     {
-        $project = factory(Project::class)->create();
-        $loop = factory(Loop::class)->make();
-        $project->addLoop($loop);
-
         $nuggetData = [
             'name' => 'App URL',
             'data' => 'http://loops.dev'
         ];
         $nugget = new Nugget($nuggetData);
-        $loop->addNugget($nugget);
+        $this->loop->addNugget($nugget);
         $this->assertDatabaseHas('nuggets', $nuggetData);
-        $this->assertTrue($loop->nuggets()->count() == 1);
+        $this->assertTrue($this->loop->nuggets()->count() == 1);
     }
 
 }
