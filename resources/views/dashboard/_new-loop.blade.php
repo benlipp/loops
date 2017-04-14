@@ -20,9 +20,12 @@
                             <div class="form-group">
                                 <label>Project</label>
                                 <select name="project" class="form-control">
-{{--                                    @foreach(Auth::user()->projects as $project)--}}
-                                    @foreach(\Loops\Models\Project::all() as $project)
-                                        <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                    @foreach( \Auth::user()->teams as $team)
+                                        <optgroup label="{{ $team->name }}">
+                                            @foreach($team->projects as $project)
+                                                <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                            @endforeach
+                                        </optgroup>
                                     @endforeach
                                 </select>
                             </div>

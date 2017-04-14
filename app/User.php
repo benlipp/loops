@@ -78,7 +78,20 @@ class User extends Authenticatable
     public function projectsByTeam($team_id)
     {
         $team = $this->teams()->where('team_id', $team_id)->first();
+
         return $team->projects();
+    }
+
+    public function projects()
+    {
+        return \DB::table('projects')->join('team_user', 'projects.team_id', '=', 'team_user.team_id')
+                  ->select('projects.*', 'team_user.user_id')->where('team_user.user_id', '=', $this->id)
+            ;
+    }
+
+    public function getProjectsAttribute()
+    {
+        return $this->projects()->get();
     }
 
 }

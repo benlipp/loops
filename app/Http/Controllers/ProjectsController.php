@@ -7,6 +7,7 @@ use Loops\Models\Contact;
 use Loops\Models\Note;
 use Loops\Models\Nugget;
 use Loops\Models\Project;
+use Loops\Models\Team;
 
 class ProjectsController extends Controller
 {
