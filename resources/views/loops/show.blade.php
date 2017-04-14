@@ -6,15 +6,13 @@
             <div class="col-md-8">
                 <h2 class="loop-title">{{ $theLoop->name }}</h2>
                 <ul class="loop-details">
-                    <li><strong>Client: </strong>Loop Client</li>
-                    <li><strong>Agency: </strong>LoopAgency</li>
+                    <li><strong>Team: </strong>{{ $theLoop->project->team->name }}</li>
                     <li><strong>Project: </strong><a class="style-link"
                                                      href="/projects/{{ $theLoop->project->id }}">{{ $theLoop->project->name }}</a>
                     </li>
+                    <li><strong>Agency: </strong>Loop Agency</li>
+                    <li><strong>Client: </strong>Loop Client</li>
                 </ul>
-                <span class="loop-description">
-                    Loop description here because things happen sometimes
-                </span>
             </div>
             <div class="col-md-4">
                 <ul class="loop-status">
@@ -22,23 +20,11 @@
                     <li><span>On</span>: <span>{{ $theLoop->created_at->format('F j, Y') }}</span></li>
                     <li><span>At</span>: <span>{{ $theLoop->created_at->format('g:i a') }}</span></li>
                     <li><span>Latest Status</span>: <span><strong>{{ $theLoop->status }}</strong></span></li>
-                    <li>&nbsp;</li>
-                    <li>
-                        <span>Assigned To</span>:
-                        <span>
-                            <select class="form-control" id="user-select">
-                                <option value="">Nobody</option>
-                                @foreach(\App\User::all() as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
-                            </select>
-                        </span>
-                    </li>
                 </ul>
             </div>
         </div>
         <div class="row nuggets">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 @if($theLoop->nuggets)
                     <ul class="nugget-group">
                         @foreach($theLoop->nuggets as $nugget)
@@ -48,6 +34,14 @@
                 @endif
                 <a href="#" data-toggle="modal" data-target="#nugget-modal"><span
                             class="glyphicon glyphicon-plus"></span> New Nugget</a>
+            </div>
+            <div class="col-md-4">
+                <select class="form-control" id="user-select">
+                    <option value="">Nobody</option>
+                    @foreach($theLoop->project->team->users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <div class="row loop-buttons">
@@ -89,14 +83,17 @@
     @include('loops._new-note-modal')
     @include('loops._close-loop-modal')
     @include('loops._nugget-modal')
+@endsection
 
 @section('scripts')
     @parent
     <script>
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
-            {{--$("#user-select").on('change', function () {--}}
-                {{--var user = $(this).val();--}}
+            $("#user-select").on('change', function () {
+                var user = $(this).val();
+                console.log('User changed to: ' + user);
+
                 {{--$.ajax('{{ route('loop-assign-user', ['loop' => $theLoop]) }}', {--}}
                     {{--type: "POST",--}}
                     {{--data: { "user" :user},--}}
@@ -109,8 +106,7 @@
                         {{--console.log(error.responseJSON);--}}
                     {{--}--}}
                 {{--});--}}
-            {{--});--}}
+            });
         });
     </script>
-@endsection
 @endsection

@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
          $this->call(UsersTableSeeder::class);
          $user = User::first();
          $team = factory(Team::class)->create();
+         $team->addUser($user);
          $projects = factory(Project::class, 2)->make();
          foreach ($projects as $project)
          {

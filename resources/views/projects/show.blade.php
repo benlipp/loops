@@ -5,8 +5,9 @@
         <div class="row loop-header">
             <div class="col-md-8">
                 <h2 class="loop-title">{{ $project->name }}</h2>
-                @if($project->contacts()->count() > 0)
-                    <ul class="loop-details">
+                <ul class="loop-details">
+                    <li><strong>Team: </strong>{{ $project->team->name }}</li>
+                    @if($project->contacts()->count() > 0)
                         <li><strong>Client: </strong>{{ $project->contacts()->first()->name }}</li>
                         @if($project->contacts()->first()->email)
                             <li>
@@ -20,12 +21,10 @@
                                 <a class="style-link" href="tel:{{ $project->contacts()->first()->phone }}">{{ $project->contacts()->first()->phone }}</a>
                             </li>
                         @endif
-                    </ul>
-                @else
-                    <ul class="loop-details">
-                        <li>contact info here (this project doesn't have any)</li>
-                    </ul>
-                @endif
+                    @else
+                        <li><strong>ContactInfo: </strong>Here</li>
+                    @endif
+                </ul>
             </div>
             <div class="col-md-4">
                 <ul class="loop-status">
