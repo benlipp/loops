@@ -23,6 +23,18 @@
                 </ul>
             </div>
         </div>
+        <div class="row nuggets">
+            <div class="col-md-12">
+                @if($theLoop->nuggets)
+                    <ul class="nugget-group">
+                        @foreach($theLoop->nuggets as $nugget)
+                            <li><span class="nugget-name">{{ $nugget->name }} </span>{{ $nugget->data }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+                <a href="#" data-toggle="modal" data-target="#nugget-modal"><span class="glyphicon glyphicon-plus"></span> New Nugget</a>
+            </div>
+        </div>
         <div class="row loop-buttons">
             <div class="col-md-3">
                 <button class="btn btn-block btn-default" data-toggle="modal" data-target="#new-note-modal">New Note</button>
@@ -55,6 +67,7 @@
 
     @include('loops._new-note-modal')
     @include('loops._close-loop-modal')
+    @include('loops._nugget-modal')
 
     @section('scripts')
         @parent

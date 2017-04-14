@@ -33,8 +33,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Note</label>
-                                <textarea name="note" class="form-control" value="{{ old('note') }}"
-                                          style="resize: none" rows="5"></textarea>
+                                <textarea name="note" class="form-control" value="{{ old('note') }}" style="resize: none" rows="5"></textarea>
                             </div>
                         </div>
                     </div>

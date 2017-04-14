@@ -39,5 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('{loop}', 'LoopsController@show')->name('loop-show');
         Route::post('{loop}/notes', 'LoopsController@addNote')->name('loop-add-note');
         Route::post('{loop}/close', 'LoopsController@close')->name('loop-close');
+        Route::post('{loop}/nugget', 'LoopsController@addNugget')->name('loop-add-nugget');
+
     });
 });

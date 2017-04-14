@@ -12,7 +12,7 @@ trait HasNuggets
      */
     public function nuggets()
     {
-        return $this->morphMany(Nugget::class, 'nuggetable')->orderBy('sort_order');
+        return $this->morphMany(Nugget::class, 'nuggetable')->orderBy('sort_order')->orderBy('created_at', 'asc');
     }
 
     /**

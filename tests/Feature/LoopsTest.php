@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\User;
 use Loops\Models\Loop;
 use Loops\Models\Note;
+use Loops\Models\Nugget;
 use Loops\Models\Project;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
@@ -25,7 +26,7 @@ class LoopsTest extends TestCase
 
         $loopData = [
             'name' => $loop->name,
-            'id' => $loop->id
+            'id'   => $loop->id
         ];
 
         $this->assertDatabaseHas('loops', $loopData);
@@ -61,14 +62,14 @@ class LoopsTest extends TestCase
         $loop = factory(Loop::class)->make();
         $project->addLoop($loop)->addUser($user);
         $this->assertDatabaseHas('loops', [
-            'id' => $loop->id,
+            'id'     => $loop->id,
             'status' => 'open'
         ]);
         $loop->close();
         $this->assertTrue($loop->isClosed());
         $this->assertEquals('Closed', $loop->status);
         $this->assertDatabaseHas('loops', [
-            'id' => $loop->id,
+            'id'     => $loop->id,
             'status' => 'closed'
         ]);
 
@@ -76,7 +77,7 @@ class LoopsTest extends TestCase
         $this->assertEquals('Open', $loop->status);
         $this->assertTrue($loop->isOpen());
         $this->assertDatabaseHas('loops', [
-            'id' => $loop->id,
+            'id'     => $loop->id,
             'status' => 'open'
         ]);
     }
@@ -88,7 +89,7 @@ class LoopsTest extends TestCase
         $loop = factory(Loop::class)->make();
         $project->addLoop($loop)->addUser($user);
         $this->assertDatabaseHas('loops', [
-            'id' => $loop->id,
+            'id'     => $loop->id,
             'status' => 'open'
         ]);
 
@@ -112,7 +113,7 @@ class LoopsTest extends TestCase
         $loop = factory(Loop::class)->make();
         $project->addLoop($loop)->addUser($user);
         $this->assertDatabaseHas('loops', [
-            'id' => $loop->id,
+            'id'     => $loop->id,
             'status' => 'open'
         ]);
 
@@ -129,6 +130,22 @@ class LoopsTest extends TestCase
         $this->assertTrue($loop->isOpen());
         $this->assertEquals('Open', $loop->status);
         $this->assertTrue($loop->notes()->count() == 2);
+    }
+
+    public function testAddNugget()
+    {
+        $project = factory(Project::class)->create();
+        $loop = factory(Loop::class)->make();
+        $project->addLoop($loop);
+
+        $nuggetData = [
+            'name' => 'App URL',
+            'data' => 'http://loops.dev'
+        ];
+        $nugget = new Nugget($nuggetData);
+        $loop->addNugget($nugget);
+        $this->assertDatabaseHas('nuggets', $nuggetData);
+        $this->assertTrue($loop->nuggets()->count() == 1);
     }
 
 }

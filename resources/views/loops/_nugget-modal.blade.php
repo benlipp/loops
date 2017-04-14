@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">Nugget</h4>
+                <h4 class="modal-title">Add Nugget</h4>
             </div>
             <div class="modal-body">
                 <form id="nugget-form">
@@ -37,7 +37,7 @@
     @parent
     <script>
         function addNugget() {
-            $.ajax('{{ route('project-add-nugget', ['project' => $project]) }}', {
+            $.ajax('{{ route('loop-add-nugget', ['loop' => $theLoop]) }}', {
                 type: "POST",
                 data: $("#nugget-form").serialize(),
                 success: function () {
