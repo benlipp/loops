@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 use Loops\Models\Loop;
 use Loops\Models\Note;
 use Loops\Models\Project;
+use Loops\Models\Team;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,17 +18,16 @@ class DatabaseSeeder extends Seeder
     {
          $this->call(UsersTableSeeder::class);
          $user = User::first();
-         $projects = factory(Project::class, 2)->create();
+         $team = factory(Team::class)->create();
+         $projects = factory(Project::class, 2)->make();
          foreach ($projects as $project)
          {
+             $team->addProject($project);
              $loop = factory(Loop::class)->make();
              $project->addLoop($loop)->save();
              $loop->addNote(new Note([
                  'body'   => '_test_ **markdown** document',
              ]), $user);
-
-
-             $project->addUser($user)->save();
          }
     }
 }

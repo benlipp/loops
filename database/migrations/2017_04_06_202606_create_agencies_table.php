@@ -14,7 +14,8 @@ class CreateAgenciesTable extends Migration
     public function up()
     {
         Schema::create('agencies', function (Blueprint $table) {
-            $table->increments('id');
+            $table->uuid('id');
+            $table->primary('id');
             $table->timestamps();
         });
     }
