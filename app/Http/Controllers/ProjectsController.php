@@ -23,6 +23,7 @@ class ProjectsController extends Controller
 
         $this->validate($request, [
             'name'          => 'required',
+            'team'          => 'required',
             'contact.name'  => 'required',
             'contact.email' => 'required_without:contact.phone',
             'contact.phone' => 'required_without:contact.email',
@@ -31,13 +32,11 @@ class ProjectsController extends Controller
         $project = new Project([
             'name' => $request->name
         ]);
-        $project->save();
-
-        // TODO: this feels like a security flaw (on update), we should check if the project already exists first, and only addUser() on new project
-        $project->addUser($request->user());
+        $team = Team::find($request->team);
+        $team->addProject($project);
 
         $contact = new Contact($request->contact);
-        $contact->project()->associate($project)->save();
+        $project->addContact($contact);
 
         if ($request->note) {
             $project->addNote(new Note([
