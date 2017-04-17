@@ -27,7 +27,9 @@ class LoopsController extends Controller
             'body' => $request->note
         ]));
 
-        return redirect()->route('loop-show', ['loop' => $loop]);
+        return response()->json([
+            'url' => route('loop-show', ['loop' => $loop])
+        ]);
     }
 
     public function show(Loop $loop)

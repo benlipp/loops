@@ -14,8 +14,7 @@ class ProjectsController extends Controller
 
     public function index(Request $request)
     {
-        $projects = Project::all();//$request->user()->projects;
-
+        $projects = Team::getFromSession()->projects;
         return view('projects.index', compact('projects'));
     }
 

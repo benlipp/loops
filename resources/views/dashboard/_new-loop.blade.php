@@ -57,8 +57,8 @@
             $.ajax('/loops', {
                 type: "POST",
                 data: $("#new-loop-form").serialize(),
-                success: function(){
-                    window.location = window.location;
+                success: function(success){
+                    window.location = success.url;
                 },
                 error: function (error) {
                     alert("Error, see console");
