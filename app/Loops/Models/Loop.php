@@ -8,6 +8,7 @@ use Loops\Traits\HasNuggets;
 
 class Loop extends UuidModel
 {
+
     use HasNotes;
     use HasNuggets;
 
@@ -33,9 +34,14 @@ class Loop extends UuidModel
      * @param User $user
      * @return $this
      */
-    public function assignTo(User $user)
+    public function assignTo(User $user = null)
     {
-        $this->user()->associate($user)->save();
+        if ($user) {
+            $this->user()->associate($user)->save();
+        } else {
+            $this->user()->dissociate()->save();
+        }
+
         return $this;
     }
 
@@ -78,8 +84,7 @@ class Loop extends UuidModel
      */
     public function open(Note $note = null, User $author = null)
     {
-        if (isset($note))
-        {
+        if (isset($note)) {
             $this->addNote($note, $author);
         }
 
@@ -97,8 +102,7 @@ class Loop extends UuidModel
      */
     public function close(Note $note = null, User $author = null)
     {
-        if (isset($note))
-        {
+        if (isset($note)) {
             $this->addNote($note, $author);
         }
 
@@ -124,6 +128,7 @@ class Loop extends UuidModel
     public function getOpenedByAttribute()
     {
         $firstNote = $this->notes()->orderBy('created_at', 'asc')->first();
+
         return $firstNote->author;
     }
 

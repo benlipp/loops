@@ -6,7 +6,6 @@
             <div class="col-md-8">
                 <h2 class="loop-title">{{ $project->name }}</h2>
                 <ul class="loop-details">
-                    <li><strong>Team: </strong>{{ $project->team->name }}</li>
                     @if($project->contacts()->count() > 0)
                         <li><strong>Client: </strong>{{ $project->contacts()->first()->name }}</li>
                         @if($project->contacts()->first()->email)
@@ -48,7 +47,7 @@
         </div>
         <div class="row loop-buttons">
             <div class="col-md-3">
-                <button class="btn btn-block btn-default" data-toggle="modal" data-target="#open-loop-modal" onclick="alert('use /loops for now');">Open A Loop</button>
+                <button class="btn btn-block btn-default" data-toggle="modal" data-target="#new-loop-modal">Open A Loop</button>
             </div>
             <div class="col-md-3 col-md-offset-6">
                 <button class="btn btn-block btn-default" data-toggle="modal" data-target="#add-note-modal" onclick="alert('not implemented yet');">Add Note</button>
@@ -106,6 +105,7 @@
             </div>
         </div>
     </div>
+    @include('projects._new-loop')
     @include('projects._nugget-modal')
 @endsection
 

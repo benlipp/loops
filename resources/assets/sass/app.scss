@@ -6,7 +6,8 @@
 @import "variables";
 
 // Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "~sweetalert/dist/sweetalert";
 
 // Custom Modifications
 @import "custom";

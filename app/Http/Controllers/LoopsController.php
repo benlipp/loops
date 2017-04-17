@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Loops\Models\Loop;
 use Loops\Models\Note;
@@ -77,6 +78,9 @@ class LoopsController extends Controller
 
     public function assignUser(Loop $loop, Request $request)
     {
-        
+        $user = User::find($request->user);
+        $loop->assignTo($user);
+
+        return response()->json('');
     }
 }

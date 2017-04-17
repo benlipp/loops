@@ -6,7 +6,6 @@
             <div class="col-md-8">
                 <h2 class="loop-title">{{ $theLoop->name }}</h2>
                 <ul class="loop-details">
-                    <li><strong>Team: </strong>{{ $theLoop->project->team->name }}</li>
                     <li><strong>Project: </strong><a class="style-link"
                                                      href="/projects/{{ $theLoop->project->id }}">{{ $theLoop->project->name }}</a>
                     </li>
@@ -39,7 +38,11 @@
                 <select class="form-control" id="user-select">
                     <option value="">Nobody</option>
                     @foreach($theLoop->project->team->users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @if($theLoop->user->id ?? null === $user->id)
+                            <option value="{{ $user->id }}" selected>{{ $user->name }}</option>
+                        @else
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endif
                     @endforeach
                 </select>
             </div>
@@ -94,18 +97,20 @@
                 var user = $(this).val();
                 console.log('(example) User change to: ' + user);
 
-                {{--$.ajax('{{ route('loop-assign-user', ['loop' => $theLoop]) }}', {--}}
-                    {{--type: "POST",--}}
-                    {{--data: { "user" :user},--}}
-                    {{--success: function () {--}}
-                        {{--console.log('success');--}}
-                        {{--alert('User saved.');--}}
-                    {{--},--}}
-                    {{--error: function (error) {--}}
-                        {{--alert("Error, see console");--}}
-                        {{--console.log(error.responseJSON);--}}
-                    {{--}--}}
-                {{--});--}}
+                $.ajax('{{ route('loop-assign-user', ['loop' => $theLoop]) }}', {
+                    type: "POST",
+                    data: {
+                        "user": user
+                    },
+                    success: function () {
+                        console.log('success');
+                        swal("User assigned!", "Loop assigned to user.", "success");
+                    },
+                    error: function (error) {
+                        alert("Error, see console");
+                        console.log(error.responseJSON);
+                    }
+                });
             });
         });
     </script>
