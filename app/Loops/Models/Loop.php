@@ -36,12 +36,11 @@ class Loop extends UuidModel
      */
     public function assignTo(User $user = null)
     {
+        $this->user()->dissociate()->save();
         if ($user) {
             $this->user()->associate($user)->save();
-        } else {
-            $this->user()->dissociate()->save();
         }
-
+        
         return $this;
     }
 
