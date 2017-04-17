@@ -55,21 +55,28 @@
                             <li class="@active('dashboard/?.*') @active('loops/?.*')"><a href="{{ route('dashboard') }}">Loops</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ \Loops\Models\Team::getFromSession()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
+                                    @foreach(Auth::user()->teams as $team)
+                                        @if($team->id != \Loops\Models\Team::getFromSession()->id)
+                                            <li><a href="/team-select/{{ $team->id }}">{{ $team->name }}</a></li>
+                                        @endif
+                                    @endforeach
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="#/teams/new"><span class="glyphicon glyphicon-plus"></span> New Team</a></li>
                                 </ul>
+                            </li>
+                            <li>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </li>
                         @endif
                     </ul>

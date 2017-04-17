@@ -3,6 +3,7 @@
 namespace Loops\Models;
 
 use App\User;
+use Illuminate\Support\Facades\Session;
 
 class Team extends UuidModel
 {
@@ -58,6 +59,12 @@ class Team extends UuidModel
         $this->users()->detach($user);
 
         return $this;
+    }
+
+    public static function getFromSession()
+    {
+        $team_id = \Session::get('team_id') ?? \Auth::user()->teams()->first()->id;
+        return self::find($team_id);
     }
 
 }
