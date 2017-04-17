@@ -69,10 +69,11 @@
                 type: "POST",
                 data: $("#new-project-form").serialize(),
                 success: function(){
-                    console.log('success');
+                    swal("Project Added!", "get to work", "success");
+                    window.location.reload();
                 },
                 error: function (error) {
-                    alert("Error, see console");
+                    swal("Error","see console", "error");
                     console.log(error.responseJSON);
                 }
             });
