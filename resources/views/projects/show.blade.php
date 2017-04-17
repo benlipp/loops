@@ -50,7 +50,7 @@
                 <button class="btn btn-block btn-default" data-toggle="modal" data-target="#new-loop-modal">Open A Loop</button>
             </div>
             <div class="col-md-3 col-md-offset-6">
-                <button class="btn btn-block btn-default" data-toggle="modal" data-target="#add-note-modal" onclick="alert('not implemented yet');">Add Note</button>
+                <button class="btn btn-block btn-default" data-toggle="modal" data-target="#add-note-modal">Add Note</button>
             </div>
         </div>
         <div class="row">
@@ -107,6 +107,7 @@
     </div>
     @include('projects._new-loop')
     @include('projects._nugget-modal')
+    @include('projects._add-note')
 @endsection
 
 @section('scripts')

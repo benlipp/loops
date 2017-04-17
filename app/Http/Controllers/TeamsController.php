@@ -7,7 +7,7 @@ use Loops\Models\Team;
 
 class TeamsController extends Controller
 {
-    public function teamSelect(Request $request, Team $team)
+    public function teamSelect(Team $team, Request $request)
     {
         $teams = collect($request->user()->teams()->get()->toArray());
         if(! $teams->contains('id', $team->id)){

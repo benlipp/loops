@@ -67,4 +67,15 @@ class ProjectsController extends Controller
 
         return response()->json('');
     }
+
+    public function addNote(Project $project, Request $request)
+    {
+        $this->validate($request, [
+            'note' => 'required'
+        ]);
+        $note = new Note(['body' => $request->note]);
+        $project->addNote($note);
+
+        return response()->json('');
+    }
 }

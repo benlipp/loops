@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('', 'ProjectsController@store')->name('project-store');
         Route::get('{project}', 'ProjectsController@show')->name('project-show');
         Route::post('{project}/nugget', 'ProjectsController@addNugget')->name('project-add-nugget');
+        Route::post('{project}/notes', 'ProjectsController@addNote')->name('project-add-note');
     });
 
     Route::group(['prefix' => 'loops'], function () {
