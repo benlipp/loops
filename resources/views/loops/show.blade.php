@@ -38,7 +38,7 @@
                 <select class="form-control" id="user-select">
                     <option value="">Nobody</option>
                     @foreach($theLoop->project->team->users as $user)
-                        @if($theLoop->user->id ?? null === $user->id)
+                        @if($theLoop->user->id === $user->id)
                             <option value="{{ $user->id }}" selected>{{ $user->name }}</option>
                         @else
                             <option value="{{ $user->id }}">{{ $user->name }}</option>

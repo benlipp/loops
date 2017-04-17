@@ -40,7 +40,7 @@ class Loop extends UuidModel
         if ($user) {
             $this->user()->associate($user)->save();
         }
-        
+
         return $this;
     }
 
