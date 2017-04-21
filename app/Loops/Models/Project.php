@@ -53,23 +53,10 @@ class Project extends UuidModel
      * @param User $user
      * @return mixed
      */
-    public function scopeLoopsByUser($query, User $user)
+    public function scopeLoopsByUser($query, User $user = null)
     {
         return $query->whereHas('loops', function ($query) use ($user) {
             $query->assignedToUser($user);
-        });
-    }
-
-    /**
-     * Open loops assigned to user
-     * @param $query
-     * @param User $user
-     * @return mixed
-     */
-    public function scopeOpenLoopsByUser($query, User $user)
-    {
-        return $query->whereHas('loops', function ($query) use ($user) {
-            $query->assignedToUser($user)->open();
         });
     }
 
