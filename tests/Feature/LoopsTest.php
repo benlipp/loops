@@ -48,6 +48,9 @@ class LoopsTest extends TestCase
         $user = factory(User::class)->create();
         $this->loop->assignTo($user);
         $this->assertEquals($this->loop->id, $user->loops()->first()->id);
+
+        $assignedLoop = Loop::assignedToUser($user)->first();
+        $this->assertEquals($this->loop->id, $assignedLoop->id);
     }
 
     public function testLoopAddNote()
@@ -124,5 +127,4 @@ class LoopsTest extends TestCase
         $this->assertDatabaseHas('nuggets', $nuggetData);
         $this->assertTrue($this->loop->nuggets()->count() == 1);
     }
-
 }

@@ -8,6 +8,7 @@ use Loops\Models\Loop;
 use Loops\Models\Note;
 use Loops\Models\Nugget;
 use Loops\Models\Project;
+use Loops\Models\Team;
 
 class LoopsController extends Controller
 {
@@ -85,4 +86,12 @@ class LoopsController extends Controller
 
         return response()->json('');
     }
+
+    public function assignedToUser(Request $request)
+    {
+        $selectedUser = User::find($request->user);
+        $projects = Team::getFromSession()->projects()->openLoopsByUser($selectedUser)->get();
+        return view('loops.assigned-to-user', compact('selectedUser', 'projects'));
+    }
+
 }

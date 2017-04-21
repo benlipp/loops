@@ -230,6 +230,8 @@ return [
          * Custom Aliases
          */
 
+        'Team' => Loops\Models\Team::class
+
     ],
 
 ];

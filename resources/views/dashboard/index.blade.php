@@ -9,12 +9,31 @@
             <div class="col-md-3">
                 <div class="header-buttons">
                     {{--@if(count(Auth::user()->projects) >= 1)--}}
+                    <div class="row">
                         <button type="button" class="btn btn-default btn-block" data-toggle="modal" data-target="#new-loop-modal">Open a Loop</button>
+                        <div class="dropdown" style="margin-top: 5px">
+                            <button class="btn btn-default btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                View Assigned Loops
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="">All</a></li>
+                                <li role="separator" class="divider"></li>
+                                @foreach(Team::getFromSession()->users as $user)
+                                    <li><a href="{{ route('user-assigned-loops', ['user' => $user ]) }}">{{ $user->name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
                     {{--@endif--}}
                 </div>
             </div>
         </div>
-        <div class="row loop-buttons"></div>
+        <div class="row loop-buttons">
+            <div class="col-md-3">
+
+            </div>
+        </div>
         <div class="row">
             @if(count($projects) >= 1)
                 @foreach($projects as $project)

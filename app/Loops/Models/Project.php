@@ -9,6 +9,7 @@ use Loops\Traits\HasNuggets;
 
 class Project extends UuidModel
 {
+
     use HasContacts;
     use HasNotes;
     use HasNuggets;
@@ -43,6 +44,32 @@ class Project extends UuidModel
     {
         return $query->whereHas('loops', function ($query) {
             $query->open();
+        });
+    }
+
+    /**
+     * All loops assigned to user
+     * @param $query
+     * @param User $user
+     * @return mixed
+     */
+    public function scopeLoopsByUser($query, User $user)
+    {
+        return $query->whereHas('loops', function ($query) use ($user) {
+            $query->assignedToUser($user);
+        });
+    }
+
+    /**
+     * Open loops assigned to user
+     * @param $query
+     * @param User $user
+     * @return mixed
+     */
+    public function scopeOpenLoopsByUser($query, User $user)
+    {
+        return $query->whereHas('loops', function ($query) use ($user) {
+            $query->assignedToUser($user)->open();
         });
     }
 

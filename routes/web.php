@@ -23,8 +23,9 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
-
     Route::get('/team-select/{team}', 'TeamsController@teamSelect');
+
+    Route::get('/user/{user}/loops', 'LoopsController@assignedToUser')->name('user-assigned-loops');
 
     Route::group(['prefix' => 'projects'], function () {
         Route::get('', 'ProjectsController@index')->name('project-index');
