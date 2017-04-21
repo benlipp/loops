@@ -74,9 +74,9 @@ class Loop extends UuidModel
         return $query->status('closed');
     }
 
-    public function scopeAssignedToUser($query, User $user)
+    public function scopeAssignedToUser($query, $user_id = null)
     {
-        return $query->where('user_id', $user->id);
+        return $query->where('user_id', $user_id);
     }
 
     /**

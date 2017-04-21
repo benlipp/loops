@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row loop-header">
             <div class="col-md-9">
-                <h2 class="loop-title">{{ $selectedUser->name }}'s Open Loops</h2>
+                <h2 class="loop-title">{{ $selectedUser->name ?? 'Unassigned' }} - Open Loops</h2>
             </div>
             <div class="col-md-3">
                 <div class="header-buttons">
@@ -15,6 +15,7 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                             <li><a href="{{ route('dashboard') }}">All</a></li>
+                            <li><a href="{{ route('user-assigned-loops', ['user' => null ]) }}">Nobody</a></li>
                             <li role="separator" class="divider"></li>
                             @foreach(Team::getFromSession()->users as $user)
                                 <li><a href="{{ route('user-assigned-loops', ['user' => $user ]) }}">{{ $user->name }}</a></li>
@@ -35,7 +36,7 @@
                             </div>
                             <div class="panel-body">
                                 <ul class="project-loops">
-                                    @foreach($project->loops()->assignedToUser($selectedUser)->open()->get() as $l)
+                                    @foreach($project->loops()->assignedToUser($selectedUser->id ?? null)->open()->get() as $l)
                                         <li><a href="/loops/{{ $l->id }}" class="style-link"><span class="glyphicon glyphicon-refresh"></span> {{ $l->name }}</a></li>
                                     @endforeach
                                 </ul>

@@ -17,7 +17,8 @@
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="">All</a></li>
+                                <li><a href="{{ route('dashboard') }}">All</a></li>
+                                <li><a href="{{ route('user-assigned-loops', ['user' => null ]) }}">Nobody</a></li>
                                 <li role="separator" class="divider"></li>
                                 @foreach(Team::getFromSession()->users as $user)
                                     <li><a href="{{ route('user-assigned-loops', ['user' => $user ]) }}">{{ $user->name }}</a></li>
