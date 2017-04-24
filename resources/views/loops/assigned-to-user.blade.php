@@ -27,22 +27,24 @@
         </div>
         <div class="row loop-buttons"></div>
         <div class="row">
-            @if(count($projects) >= 1)
+            @if(count($projects) >= 1 )
                 @foreach($projects as $project)
-                    <div class="col-md-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading clearfix">
-                                <h2 class="panel-title"><a href="/projects/{{ $project->id }}" class="style-link">{{ $project->name }}</a></h2>
-                            </div>
-                            <div class="panel-body">
-                                <ul class="project-loops">
-                                    @foreach($project->loops()->assignedToUser($selectedUser)->open()->get() as $l)
-                                        <li><a href="/loops/{{ $l->id }}" class="style-link"><span class="glyphicon glyphicon-refresh"></span> {{ $l->name }}</a></li>
-                                    @endforeach
-                                </ul>
+                    @if($project->loops()->assignedToUser($selectedUser)->open()->count() >= 1)
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading clearfix">
+                                    <h2 class="panel-title"><a href="/projects/{{ $project->id }}" class="style-link">{{ $project->name }}</a></h2>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="project-loops">
+                                        @foreach($project->loops()->assignedToUser($selectedUser)->open()->get() as $l)
+                                            <li><a href="/loops/{{ $l->id }}" class="style-link"><span class="glyphicon glyphicon-refresh"></span> {{ $l->name }}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
             @else
                 <div class="col-md-12">
