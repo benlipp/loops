@@ -15,7 +15,7 @@ trait HasContacts
      */
     public function contacts()
     {
-        return $this->morphMany(Contact::class, 'contactable');
+        return $this->morphMany(Contact::class, 'contactable')->orderBy('created_at');
     }
 
     /**

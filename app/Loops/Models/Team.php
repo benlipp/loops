@@ -2,11 +2,20 @@
 
 namespace Loops\Models;
 
+use App\Loops\Models\Agency;
 use App\User;
 use Illuminate\Support\Facades\Session;
 
 class Team extends UuidModel
 {
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function agencies()
+    {
+        return $this->hasMany(Agency::class);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -64,6 +73,7 @@ class Team extends UuidModel
     public static function getFromSession()
     {
         $team_id = \Session::get('team_id') ?? \Auth::user()->teams()->first()->id;
+
         return self::find($team_id);
     }
 

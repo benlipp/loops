@@ -18,10 +18,10 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Team</label>
-                                <select name="team" class="form-control">
-                                    @foreach(\Auth::user()->teams as $team)
-                                        <option value="{{ $team->id }}">{{ $team->name }}</option>
+                                <label>Agency</label>
+                                <select name="agency" class="form-control">
+                                    @foreach(\Team::getFromSession()->agencies as $agency)
+                                        <option value="{{ $agency->id }}">{{ $agency->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -36,11 +36,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Contact Email</label>
-                                <input name="contact[email]" type="text" class="form-control" value="{{ old('name') }}">
+                                <input name="contact[email]" type="text" class="form-control" value="{{ old('email') }}">
                             </div>
                             <div class="form-group">
                                 <label>Contact Phone</label>
-                                <input name="contact[phone]" type="text" class="form-control" value="{{ old('name') }}">
+                                <input name="contact[phone]" type="text" class="form-control" value="{{ old('phone') }}">
                             </div>
                         </div>
                         <div class="col-md-6">

@@ -52,6 +52,7 @@
                             <li><a href="{{ route('register') }}">Register</a></li>
                         @else
                             <li class="@active('projects/?.*')"><a href="{{ route('project-index') }}">Projects</a></li>
+                            <li class="@active('agencies/?.*')"><a href="{{ route('agency-index') }}">Agencies</a></li>
                             <li class="@active('dashboard/?.*') @active('loops/?.*')"><a href="{{ route('dashboard') }}">Loops</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

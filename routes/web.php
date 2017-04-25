@@ -27,6 +27,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/user/loops/{user?}', 'LoopsController@assignedToUser')->name('user-assigned-loops');
 
+    Route::group(['prefix' => 'agencies'], function () {
+        Route::get('', 'AgenciesController@index')->name('agency-index');
+        Route::get('{agency}', 'AgenciesController@show')->name('agency-show');
+        Route::post('{agency?}', 'AgenciesController@store')->name('agency-store');
+        Route::post('{agency}/contact', 'AgenciesController@addContact')->name('agency-add-contact');
+    });
+
     Route::group(['prefix' => 'projects'], function () {
         Route::get('', 'ProjectsController@index')->name('project-index');
         Route::post('', 'ProjectsController@store')->name('project-store');

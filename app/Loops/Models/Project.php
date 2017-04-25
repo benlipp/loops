@@ -2,6 +2,7 @@
 
 namespace Loops\Models;
 
+use App\Loops\Models\Agency;
 use App\User;
 use Loops\Traits\HasContacts;
 use Loops\Traits\HasNotes;
@@ -58,6 +59,26 @@ class Project extends UuidModel
         return $query->whereHas('loops', function ($query) use ($user) {
             $query->assignedToUser($user);
         });
+    }
+
+    /**
+     * Get Agency
+     * @return mixed
+     */
+    public function getAgencyAttribute()
+    {
+        return Agency::find($this->agency_id);
+    }
+
+    /**
+     * Projects by agency
+     * @param $query
+     * @param Agency $agency
+     * @return mixed
+     */
+    public function scopeAgency($query, Agency $agency)
+    {
+        return $query->where('agency_id', $agency->id);
     }
 
     /**

@@ -23,7 +23,7 @@ class ProjectsController extends Controller
 
         $this->validate($request, [
             'name'          => 'required',
-            'team'          => 'required',
+            'agency'          => 'required',
             'contact.name'  => 'required',
             'contact.email' => 'required_without:contact.phone',
             'contact.phone' => 'required_without:contact.email',
@@ -32,7 +32,8 @@ class ProjectsController extends Controller
         $project = new Project([
             'name' => $request->name
         ]);
-        $team = Team::find($request->team);
+        $project->agency_id = $request->agency;
+        $team = Team::getFromSession();
         $team->addProject($project);
 
         $contact = new Contact($request->contact);

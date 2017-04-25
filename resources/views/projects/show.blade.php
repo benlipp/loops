@@ -27,6 +27,9 @@
             </div>
             <div class="col-md-4">
                 <ul class="loop-status">
+                    @if($project->agency)
+                        <li><span>Agency</span>:<span><a href="{{ route('agency-show', ['agency' => $project->agency ]) }}">{{  $project->agency->name }}</a></span></li>
+                    @endif
                     <li><span>Open Loops</span>:<span>{{ $project->loops()->open()->count() }}</span></li>
                     <li><span>Closed Loops</span>:<span>{{ $project->loops()->closed()->count() }}</span></li>
                     <li><span>Created At</span>:<span>{{ $project->created_at->format('F j, Y') }}</span></li>
