@@ -16,6 +16,9 @@ class CreateAgenciesTable extends Migration
         Schema::create('agencies', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
+            $table->string('name');
+            $table->uuid('team_id');
+            $table->foreign('team_id')->references('id')->on('teams');
             $table->timestamps();
         });
     }
