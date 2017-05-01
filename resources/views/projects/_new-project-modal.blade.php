@@ -20,6 +20,7 @@
                             <div class="form-group">
                                 <label>Agency</label>
                                 <select name="agency" class="form-control">
+                                    <option value="">No Agency</option>
                                     @foreach(\Team::getFromSession()->agencies as $agency)
                                         <option value="{{ $agency->id }}">{{ $agency->name }}</option>
                                     @endforeach
