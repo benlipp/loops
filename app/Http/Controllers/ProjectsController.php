@@ -23,7 +23,6 @@ class ProjectsController extends Controller
 
         $this->validate($request, [
             'name'          => 'required',
-            'agency'          => 'required',
             'contact.name'  => 'required',
             'contact.email' => 'required_without:contact.phone',
             'contact.phone' => 'required_without:contact.email',
