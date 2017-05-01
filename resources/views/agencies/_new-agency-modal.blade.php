@@ -23,7 +23,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Contact Name</label>
-                                <input name="contact[name]" type="text" class="form-control" value="{{ old('name') }}">
+                                <input name="contact[name]" type="text" class="form-control" value="{{ old('contact.name') }}">
                             </div>
                         </div>
                     </div>
@@ -31,13 +31,13 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Contact Email</label>
-                                <input name="contact[email]" type="text" class="form-control" value="{{ old('name') }}">
+                                <input name="contact[email]" type="text" class="form-control" value="{{ old('contact.email') }}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Contact Phone</label>
-                                <input name="contact[phone]" type="text" class="form-control" value="{{ old('name') }}">
+                                <input name="contact[phone]" type="text" class="form-control" value="{{ old('contact.phone') }}">
                             </div>
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                 },
                 error: function (error) {
                     swal("Error", "see console", "error");
-                    console.log(error.responseJSON);
+                    console.log(error.responseJSON || error.responseText);
                 }
             });
         }

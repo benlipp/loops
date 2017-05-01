@@ -20,13 +20,14 @@ class AgenciesController extends Controller
     public function store(Request $request, Agency $agency = null)
     {
         if (! $agency) {
-            $team = Team::getFromSession();
             $agency = new Agency();
-            $agency->team()->associate($team)->save();
         }
+        $team = Team::getFromSession();
+        $agency->team()->associate($team)->save();
         $agency->fill($request->agency);
         $contact = new Contact($request->contact);
         $agency->addContact($contact);
+        $agency->save();
 
         return response()->json($agency);
     }
