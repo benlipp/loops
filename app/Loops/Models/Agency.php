@@ -6,7 +6,6 @@ use Loops\Traits\HasContacts;
 
 class Agency extends UuidModel
 {
-
     use HasContacts;
 
     protected $fillable = ['name'];
