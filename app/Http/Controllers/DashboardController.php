@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Loops\Models\Team;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {

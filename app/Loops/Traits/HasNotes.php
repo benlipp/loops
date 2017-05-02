@@ -3,8 +3,8 @@
 namespace Loops\Traits;
 
 use App\User;
-use Illuminate\Support\Facades\Auth;
 use Loops\Models\Note;
+use Illuminate\Support\Facades\Auth;
 
 trait HasNotes
 {

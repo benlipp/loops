@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Loops\Models\Contact;
 use Loops\Models\Note;
-use Loops\Models\Nugget;
-use Loops\Models\Project;
 use Loops\Models\Team;
+use Loops\Models\Nugget;
+use Loops\Models\Contact;
+use Loops\Models\Project;
+use Illuminate\Http\Request;
 
 class ProjectsController extends Controller
 {
