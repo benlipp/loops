@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Loops\Models\Agency;
 use Loops\Models\Team;
+use Loops\Models\Agency;
 use Loops\Models\Contact;
 use Illuminate\Http\Request;
 
