@@ -10,15 +10,13 @@ use Loops\Traits\HasNuggets;
 
 class Project extends UuidModel
 {
-
     use HasContacts;
     use HasNotes;
     use HasNuggets;
 
     protected $fillable = [
-        'name'
+        'name',
     ];
-
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -37,8 +35,10 @@ class Project extends UuidModel
     }
 
     /**
-     * all of Project::query()'s open loops
+     * all of Project::query()'s open loops.
+     *
      * @param $query
+     *
      * @return mixed
      */
     public function scopeOpenLoops($query)
@@ -49,9 +49,11 @@ class Project extends UuidModel
     }
 
     /**
-     * All loops assigned to user
+     * All loops assigned to user.
+     *
      * @param $query
      * @param User $user
+     *
      * @return mixed
      */
     public function scopeLoopsByUser($query, User $user = null)
@@ -62,7 +64,8 @@ class Project extends UuidModel
     }
 
     /**
-     * Get Agency
+     * Get Agency.
+     *
      * @return mixed
      */
     public function getAgencyAttribute()
@@ -71,9 +74,11 @@ class Project extends UuidModel
     }
 
     /**
-     * Projects by agency
+     * Projects by agency.
+     *
      * @param $query
      * @param Agency $agency
+     *
      * @return mixed
      */
     public function scopeAgency($query, Agency $agency)
@@ -82,8 +87,10 @@ class Project extends UuidModel
     }
 
     /**
-     * Add a loop to the project
+     * Add a loop to the project.
+     *
      * @param Loop $loop
+     *
      * @return $this
      */
     public function addLoop(Loop $loop)
@@ -93,6 +100,4 @@ class Project extends UuidModel
 
         return $this;
     }
-
-
 }

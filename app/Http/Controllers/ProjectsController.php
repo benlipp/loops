@@ -11,16 +11,15 @@ use Loops\Models\Team;
 
 class ProjectsController extends Controller
 {
-
     public function index(Request $request)
     {
         $projects = Team::getFromSession()->projects;
+
         return view('projects.index', compact('projects'));
     }
 
     public function store(Request $request)
     {
-
         $this->validate($request, [
             'name'          => 'required',
             'contact.name'  => 'required',
@@ -29,7 +28,7 @@ class ProjectsController extends Controller
         ]);
 
         $project = new Project([
-            'name' => $request->name
+            'name' => $request->name,
         ]);
         $project->agency_id = $request->agency;
         $team = Team::getFromSession();
@@ -40,7 +39,7 @@ class ProjectsController extends Controller
 
         if ($request->note) {
             $project->addNote(new Note([
-                'body' => $request->note
+                'body' => $request->note,
             ]));
         }
 
@@ -56,11 +55,11 @@ class ProjectsController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'data' => 'required'
+            'data' => 'required',
         ]);
         $nugget = new Nugget([
             'name' => $request->name,
-            'data' => $request->data
+            'data' => $request->data,
         ]);
         $project->addNugget($nugget);
 
@@ -70,7 +69,7 @@ class ProjectsController extends Controller
     public function addNote(Project $project, Request $request)
     {
         $this->validate($request, [
-            'note' => 'required'
+            'note' => 'required',
         ]);
         $note = new Note(['body' => $request->note]);
         $project->addNote($note);

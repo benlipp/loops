@@ -16,19 +16,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call(UsersTableSeeder::class);
-         $user = User::first();
-         $team = factory(Team::class)->create();
-         $team->addUser($user);
-         $projects = factory(Project::class, 2)->make();
-         foreach ($projects as $project)
-         {
-             $team->addProject($project);
-             $loop = factory(Loop::class)->make();
-             $project->addLoop($loop)->save();
-             $loop->addNote(new Note([
+        $this->call(UsersTableSeeder::class);
+        $user = User::first();
+        $team = factory(Team::class)->create();
+        $team->addUser($user);
+        $projects = factory(Project::class, 2)->make();
+        foreach ($projects as $project) {
+            $team->addProject($project);
+            $loop = factory(Loop::class)->make();
+            $project->addLoop($loop)->save();
+            $loop->addNote(new Note([
                  'body'   => '_test_ **markdown** document',
              ]), $user);
-         }
+        }
     }
 }

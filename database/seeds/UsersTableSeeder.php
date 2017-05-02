@@ -5,7 +5,6 @@ use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      *
@@ -16,7 +15,7 @@ class UsersTableSeeder extends Seeder
         User::create([
             'name'     => 'My User',
             'email'    => 'test@test.dev',
-            'password' => bcrypt('password')
+            'password' => bcrypt('password'),
         ]);
     }
 }

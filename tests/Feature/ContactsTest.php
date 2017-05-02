@@ -2,17 +2,14 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Loops\Models\Contact;
 use Loops\Models\Project;
 use Loops\Models\Team;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ContactsTest extends TestCase
 {
-
     use DatabaseMigrations;
 
     protected $team;
@@ -32,7 +29,5 @@ class ContactsTest extends TestCase
      */
     public function testCreateContact()
     {
-
     }
-
 }

@@ -3,17 +3,14 @@
 namespace Tests\Feature;
 
 use App\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Loops\Models\Nugget;
 use Loops\Models\Project;
 use Loops\Models\Team;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ProjectsTest extends TestCase
 {
-
     use DatabaseMigrations;
 
     protected $team;
@@ -30,7 +27,7 @@ class ProjectsTest extends TestCase
     public function testCreatesProjects()
     {
         $projectData = [
-            'name' => 'TestProject'
+            'name' => 'TestProject',
         ];
 
         $project = new Project($projectData);
@@ -51,7 +48,7 @@ class ProjectsTest extends TestCase
     {
         $nuggetData = [
             'name' => 'App URL',
-            'data'=> 'http://loops.dev'
+            'data' => 'http://loops.dev',
         ];
         $nugget = new Nugget($nuggetData);
         $this->project->addNugget($nugget);

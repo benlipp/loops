@@ -8,12 +8,11 @@ use Loops\Traits\HasNuggets;
 
 class Loop extends UuidModel
 {
-
     use HasNotes;
     use HasNuggets;
 
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     /**
@@ -30,8 +29,10 @@ class Loop extends UuidModel
     }
 
     /**
-     * Assign the loop to a User
+     * Assign the loop to a User.
+     *
      * @param User $user
+     *
      * @return $this
      */
     public function assignTo(User $user = null)
@@ -45,7 +46,8 @@ class Loop extends UuidModel
     }
 
     /**
-     * Scope by Status
+     * Scope by Status.
+     *
      * @param $query
      * @param $status
      */
@@ -55,8 +57,10 @@ class Loop extends UuidModel
     }
 
     /**
-     * Scope to Open Loops
+     * Scope to Open Loops.
+     *
      * @param $query
+     *
      * @return mixed
      */
     public function scopeOpen($query)
@@ -65,8 +69,10 @@ class Loop extends UuidModel
     }
 
     /**
-     * Scope to Closed Loops
+     * Scope to Closed Loops.
+     *
      * @param $query
+     *
      * @return mixed
      */
     public function scopeClosed($query)
@@ -80,9 +86,11 @@ class Loop extends UuidModel
     }
 
     /**
-     * Open the loop - with optional note
+     * Open the loop - with optional note.
+     *
      * @param Note|null $note
      * @param User|null $author
+     *
      * @return $this
      */
     public function open(Note $note = null, User $author = null)
@@ -98,9 +106,11 @@ class Loop extends UuidModel
     }
 
     /**
-     * Close the loop - with optional Note
+     * Close the loop - with optional Note.
+     *
      * @param Note|null $note
      * @param User|null $author
+     *
      * @return $this
      */
     public function close(Note $note = null, User $author = null)
@@ -116,7 +126,8 @@ class Loop extends UuidModel
     }
 
     /**
-     * Get the formatted status
+     * Get the formatted status.
+     *
      * @return string
      */
     public function getStatusAttribute()
@@ -125,7 +136,8 @@ class Loop extends UuidModel
     }
 
     /**
-     * Get the user who opened the note
+     * Get the user who opened the note.
+     *
      * @return mixed
      */
     public function getOpenedByAttribute()
@@ -150,5 +162,4 @@ class Loop extends UuidModel
     {
         return $this->attributes['status'] === 'closed';
     }
-
 }
