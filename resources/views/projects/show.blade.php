@@ -9,7 +9,7 @@
                     @if($project->contacts()->count() > 0)
                         <li><strong>Client: </strong>{{ $project->contacts()->first()->name }}</li>
                         @if($project->agency)
-                            <li><strong>Agency: </strong><a href="{{ route('agency-show', ['agency' => $agency]) }}">{{ $agency->name }}</a></li>
+                            <li><strong>Agency: </strong><a href="{{ route('agency-show', ['agency' => $project->agency]) }}">{{ $project->agency->name }}</a></li>
                         @endif
                         @if($project->contacts()->first()->email)
                             <li>
