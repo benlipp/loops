@@ -1,11 +1,11 @@
 <?php
 
 use App\User;
-use Illuminate\Database\Seeder;
 use Loops\Models\Loop;
 use Loops\Models\Note;
-use Loops\Models\Project;
 use Loops\Models\Team;
+use Loops\Models\Project;
+use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {

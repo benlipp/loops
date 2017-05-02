@@ -2,8 +2,8 @@
 
 namespace Loops\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Database\Eloquent\Model;
 
 class UuidModel extends Model
 {
