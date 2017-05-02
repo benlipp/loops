@@ -12,24 +12,23 @@ use Loops\Models\Team;
 
 class LoopsController extends Controller
 {
-
     public function store(Request $request)
     {
         $this->validate($request, [
             'name'    => 'required|max:255',
             'project' => 'required',
-            'note'    => 'required'
+            'note'    => 'required',
         ]);
 
         $project = Project::find($request->project);
         $loop = new Loop(['name' => $request->name]);
         $project->addLoop($loop);
         $loop->open(new Note([
-            'body' => $request->note
+            'body' => $request->note,
         ]));
 
         return response()->json([
-            'url' => route('loop-show', ['loop' => $loop])
+            'url' => route('loop-show', ['loop' => $loop]),
         ]);
     }
 
@@ -41,11 +40,11 @@ class LoopsController extends Controller
     public function addNote(Loop $loop, Request $request)
     {
         $this->validate($request, [
-            'note' => 'required'
+            'note' => 'required',
         ]);
 
         $loop->addNote(new Note([
-            'body' => $request->note
+            'body' => $request->note,
         ]));
 
         return back()->with('status', 'Saved');
@@ -54,11 +53,11 @@ class LoopsController extends Controller
     public function close(Loop $loop, Request $request)
     {
         $this->validate($request, [
-            'note' => 'required'
+            'note' => 'required',
         ]);
 
         $loop->close(new Note([
-            'body' => $request->note
+            'body' => $request->note,
         ]));
 
         return back()->with('status', 'Saved');
@@ -68,11 +67,11 @@ class LoopsController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'data' => 'required'
+            'data' => 'required',
         ]);
         $nugget = new Nugget([
             'name' => $request->name,
-            'data' => $request->data
+            'data' => $request->data,
         ]);
         $loop->addNugget($nugget);
 
@@ -91,7 +90,7 @@ class LoopsController extends Controller
     {
         $selectedUser = User::find($request->user) ?? null;
         $projects = Team::getFromSession()->projects()->loopsByUser($selectedUser)->openLoops()->get();
+
         return view('loops.assigned-to-user', compact('selectedUser', 'projects'));
     }
-
 }

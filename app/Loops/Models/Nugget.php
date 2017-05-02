@@ -4,10 +4,9 @@ namespace Loops\Models;
 
 class Nugget extends UuidModel
 {
-
     protected $fillable = [
         'name',
-        'data'
+        'data',
     ];
 
     /**

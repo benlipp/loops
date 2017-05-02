@@ -24,12 +24,12 @@ class Agency extends UuidModel
     }
 
     /**
-     * Get the first (primary) contact
+     * Get the first (primary) contact.
+     *
      * @return mixed
      */
     public function getPrimaryContactAttribute()
     {
         return $this->contacts()->first();
     }
-
 }

@@ -4,11 +4,9 @@ namespace Loops\Models;
 
 use App\Loops\Models\Agency;
 use App\User;
-use Illuminate\Support\Facades\Session;
 
 class Team extends UuidModel
 {
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -34,8 +32,10 @@ class Team extends UuidModel
     }
 
     /**
-     * Add a project to the team
+     * Add a project to the team.
+     *
      * @param Project $project
+     *
      * @return $this
      */
     public function addProject(Project $project)
@@ -47,8 +47,10 @@ class Team extends UuidModel
     }
 
     /**
-     * Add a user to the team
+     * Add a user to the team.
+     *
      * @param User $user
+     *
      * @return $this
      */
     public function addUser(User $user)
@@ -59,8 +61,10 @@ class Team extends UuidModel
     }
 
     /**
-     * Remove a user from the team
+     * Remove a user from the team.
+     *
      * @param User $user
+     *
      * @return $this
      */
     public function removeUser(User $user)
@@ -76,5 +80,4 @@ class Team extends UuidModel
 
         return self::find($team_id);
     }
-
 }

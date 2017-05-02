@@ -2,17 +2,15 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Loops\Models\Loop;
 use Loops\Models\Note;
-use Loops\Models\Project;
 use Loops\Models\Team;
 use Ramsey\Uuid\Uuid;
 
 class User extends Authenticatable
 {
-
     use Notifiable;
 
     public $incrementing = false;
@@ -22,7 +20,7 @@ class User extends Authenticatable
         parent::boot();
 
         static::creating(function ($model) {
-            $model->{$model->getKeyName()} = (string)Uuid::uuid4();
+            $model->{$model->getKeyName()} = (string) Uuid::uuid4();
         });
     }
 
@@ -73,6 +71,7 @@ class User extends Authenticatable
 
     /**
      * @param null $team_id
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     public function projectsByTeam($team_id)
@@ -85,13 +84,11 @@ class User extends Authenticatable
     public function projects()
     {
         return \DB::table('projects')->join('team_user', 'projects.team_id', '=', 'team_user.team_id')
-                  ->select('projects.*', 'team_user.user_id')->where('team_user.user_id', '=', $this->id)
-            ;
+                  ->select('projects.*', 'team_user.user_id')->where('team_user.user_id', '=', $this->id);
     }
 
     public function getProjectsAttribute()
     {
         return $this->projects()->get();
     }
-
 }

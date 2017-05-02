@@ -8,7 +8,6 @@ use Loops\Models\Note;
 
 trait HasNotes
 {
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
@@ -18,9 +17,11 @@ trait HasNotes
     }
 
     /**
-     * Add a note to the loop
+     * Add a note to the loop.
+     *
      * @param Note $note
      * @param User $author
+     *
      * @return $this
      */
     public function addNote(Note $note, User $author = null)
@@ -31,5 +32,4 @@ trait HasNotes
 
         return $this;
     }
-
 }

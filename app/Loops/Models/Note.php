@@ -3,14 +3,12 @@
 namespace Loops\Models;
 
 use App\User;
-use Illuminate\Database\Eloquent\Model;
 use Parsedown;
 
 class Note extends UuidModel
 {
-
     protected $fillable = [
-        'body'
+        'body',
     ];
 
     /**

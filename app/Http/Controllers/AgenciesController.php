@@ -9,7 +9,6 @@ use Loops\Models\Team;
 
 class AgenciesController extends Controller
 {
-
     public function index()
     {
         $agencies = Team::getFromSession()->agencies;
@@ -19,7 +18,7 @@ class AgenciesController extends Controller
 
     public function store(Request $request, Agency $agency = null)
     {
-        if (! $agency) {
+        if (!$agency) {
             $agency = new Agency();
         }
         $team = Team::getFromSession();

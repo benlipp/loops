@@ -6,7 +6,6 @@ use Loops\Models\Nugget;
 
 trait HasNuggets
 {
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
@@ -17,6 +16,7 @@ trait HasNuggets
 
     /**
      * @param Nugget $nugget
+     *
      * @return $this
      */
     public function addNugget(Nugget $nugget)
@@ -26,5 +26,4 @@ trait HasNuggets
 
         return $this;
     }
-
 }

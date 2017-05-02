@@ -3,15 +3,13 @@
 namespace Tests\Feature;
 
 use App\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Loops\Models\Loop;
 use Loops\Models\Note;
 use Loops\Models\Nugget;
 use Loops\Models\Project;
 use Loops\Models\Team;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class LoopsTest extends TestCase
 {
@@ -36,7 +34,7 @@ class LoopsTest extends TestCase
     {
         $loopData = [
             'name' => $this->loop->name,
-            'id'   => $this->loop->id
+            'id'   => $this->loop->id,
         ];
 
         $this->assertDatabaseHas('loops', $loopData);
@@ -69,7 +67,7 @@ class LoopsTest extends TestCase
         $this->assertEquals('Closed', $this->loop->status);
         $this->assertDatabaseHas('loops', [
             'id'     => $this->loop->id,
-            'status' => 'closed'
+            'status' => 'closed',
         ]);
 
         $this->loop->open();
@@ -77,7 +75,7 @@ class LoopsTest extends TestCase
         $this->assertTrue($this->loop->isOpen());
         $this->assertDatabaseHas('loops', [
             'id'     => $this->loop->id,
-            'status' => 'open'
+            'status' => 'open',
         ]);
     }
 
@@ -120,7 +118,7 @@ class LoopsTest extends TestCase
     {
         $nuggetData = [
             'name' => 'App URL',
-            'data' => 'http://loops.dev'
+            'data' => 'http://loops.dev',
         ];
         $nugget = new Nugget($nuggetData);
         $this->loop->addNugget($nugget);

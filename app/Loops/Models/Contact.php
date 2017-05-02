@@ -6,7 +6,6 @@ use Loops\Traits\HasNotes;
 
 class Contact extends UuidModel
 {
-
     use HasNotes;
 
     protected $fillable = [
@@ -14,7 +13,7 @@ class Contact extends UuidModel
         'company',
         'email',
         'phone',
-        'primary'
+        'primary',
     ];
 
     /**
@@ -24,5 +23,4 @@ class Contact extends UuidModel
     {
         return $this->morphTo();
     }
-
 }

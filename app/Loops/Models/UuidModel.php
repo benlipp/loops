@@ -14,7 +14,7 @@ class UuidModel extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $model->{$model->getKeyName()} = (string)Uuid::uuid4();
+            $model->{$model->getKeyName()} = (string) Uuid::uuid4();
         });
     }
 }

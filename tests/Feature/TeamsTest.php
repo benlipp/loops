@@ -2,16 +2,13 @@
 
 namespace Tests\Feature;
 
-use Loops\Models\Project;
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Loops\Models\Team;
-
+use Tests\TestCase;
 
 class TeamsTest extends TestCase
 {
-
     use DatabaseMigrations;
 
     protected $team;
@@ -30,7 +27,7 @@ class TeamsTest extends TestCase
     {
         $assoc_data = [
             'team_id' => $this->team->id,
-            'user_id' => $this->user->id
+            'user_id' => $this->user->id,
         ];
 
         // user added in setup function
@@ -41,5 +38,4 @@ class TeamsTest extends TestCase
         $this->assertTrue($this->team->users()->count() == 0);
         $this->assertDatabaseMissing('team_user', $assoc_data);
     }
-
 }

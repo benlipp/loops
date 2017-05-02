@@ -2,14 +2,10 @@
 
 namespace Loops\Traits;
 
-use App\User;
-use Illuminate\Support\Facades\Auth;
 use Loops\Models\Contact;
-use Loops\Models\Note;
 
 trait HasContacts
 {
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
@@ -19,8 +15,10 @@ trait HasContacts
     }
 
     /**
-     * Add a contact to the loop
+     * Add a contact to the loop.
+     *
      * @param Contact $contact
+     *
      * @return $this
      */
     public function addContact(Contact $contact)
@@ -30,5 +28,4 @@ trait HasContacts
 
         return $this;
     }
-
 }
