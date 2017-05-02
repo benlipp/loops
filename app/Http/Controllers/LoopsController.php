@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Http\Request;
 use Loops\Models\Loop;
 use Loops\Models\Note;
+use Loops\Models\Team;
 use Loops\Models\Nugget;
 use Loops\Models\Project;
-use Loops\Models\Team;
+use Illuminate\Http\Request;
 
 class LoopsController extends Controller
 {

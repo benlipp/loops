@@ -2,8 +2,8 @@
 
 namespace App\Loops\Models;
 
-use Loops\Models\Project;
 use Loops\Models\Team;
+use Loops\Models\Project;
 use Loops\Models\UuidModel;
 use Loops\Traits\HasContacts;
 

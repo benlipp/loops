@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Loops\Models\Team;
+use Loops\Models\Contact;
 use App\Loops\Models\Agency;
 use Illuminate\Http\Request;
-use Loops\Models\Contact;
-use Loops\Models\Team;
 
 class AgenciesController extends Controller
 {
@@ -18,7 +18,7 @@ class AgenciesController extends Controller
 
     public function store(Request $request, Agency $agency = null)
     {
-        if (!$agency) {
+        if (! $agency) {
             $agency = new Agency();
         }
         $team = Team::getFromSession();

@@ -2,12 +2,12 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Ramsey\Uuid\Uuid;
 use Loops\Models\Loop;
 use Loops\Models\Note;
 use Loops\Models\Team;
-use Ramsey\Uuid\Uuid;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {

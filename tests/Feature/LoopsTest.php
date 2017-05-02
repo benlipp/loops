@@ -3,13 +3,13 @@
 namespace Tests\Feature;
 
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\TestCase;
 use Loops\Models\Loop;
 use Loops\Models\Note;
+use Loops\Models\Team;
 use Loops\Models\Nugget;
 use Loops\Models\Project;
-use Loops\Models\Team;
-use Tests\TestCase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class LoopsTest extends TestCase
 {
