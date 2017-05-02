@@ -7,7 +7,6 @@ use Parsedown;
 
 class Note extends UuidModel
 {
-
     protected $fillable = [
         'body',
     ];

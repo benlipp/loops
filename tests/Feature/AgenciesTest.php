@@ -2,16 +2,15 @@
 
 namespace Tests\Feature;
 
+use Tests\TestCase;
+use Loops\Models\Team;
 use Loops\Models\Agency;
 use Loops\Models\Contact;
 use Loops\Models\Project;
-use Loops\Models\Team;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class AgenciesTest extends TestCase
 {
-
     use DatabaseMigrations;
 
     protected $team;
@@ -64,6 +63,4 @@ class AgenciesTest extends TestCase
         $this->agency->addContact($newContact);
         $this->assertNotEquals($newContact->id, $this->agency->primaryContact->id);
     }
-
-
 }
