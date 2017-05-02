@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Loops\Models;
+namespace Loops\Models;
 
-use Loops\Models\Team;
-use Loops\Models\Project;
-use Loops\Models\UuidModel;
 use Loops\Traits\HasContacts;
 
 class Agency extends UuidModel
 {
+
     use HasContacts;
 
     protected $fillable = ['name'];
@@ -18,6 +16,21 @@ class Agency extends UuidModel
         return $this->belongsTo(Team::class);
     }
 
+    /**
+     * @param \Loops\Models\Project $project
+     * @return $this
+     */
+    public function addProject(Project $project)
+    {
+        $project->agency()->associate($this);
+        $project->save();
+
+        return $this;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function projects()
     {
         return $this->hasMany(Project::class);

@@ -8,6 +8,7 @@
                 <ul class="loop-details">
                     @if($project->contacts()->count() > 0)
                         <li><strong>Client: </strong>{{ $project->contacts()->first()->name }}</li>
+                        @if($project->agency)
                         @if($project->contacts()->first()->email)
                             <li>
                                 <strong>E-Mail: </strong>

@@ -4,7 +4,6 @@ namespace Loops\Models;
 
 use App\User;
 use Loops\Traits\HasNotes;
-use App\Loops\Models\Agency;
 use Loops\Traits\HasNuggets;
 use Loops\Traits\HasContacts;
 
@@ -64,13 +63,11 @@ class Project extends UuidModel
     }
 
     /**
-     * Get Agency.
-     *
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function getAgencyAttribute()
+    public function agency()
     {
-        return Agency::find($this->agency_id);
+        return $this->belongsTo(Agency::class);
     }
 
     /**
@@ -99,5 +96,14 @@ class Project extends UuidModel
         $loop->save();
 
         return $this;
+    }
+
+    /**
+     * Get the Project description.
+     * @return \Loops\Models\Note
+     */
+    public function getDescriptionAttribute()
+    {
+        return $this->notes()->first();
     }
 }

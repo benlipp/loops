@@ -7,6 +7,7 @@ use Parsedown;
 
 class Note extends UuidModel
 {
+
     protected $fillable = [
         'body',
     ];
@@ -19,11 +20,18 @@ class Note extends UuidModel
         return $this->morphTo();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function author()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Get the parsed markdown.
+     * @return string
+     */
     public function getDisplayBodyAttribute()
     {
         $parsedown = new Parsedown();

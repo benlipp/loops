@@ -3,7 +3,6 @@
 namespace Loops\Models;
 
 use App\User;
-use App\Loops\Models\Agency;
 
 class Team extends UuidModel
 {
@@ -56,6 +55,19 @@ class Team extends UuidModel
     public function addUser(User $user)
     {
         $this->users()->attach($user);
+
+        return $this;
+    }
+
+    /**
+     * Add an agency to the team.
+     * @param \Loops\Models\Agency $agency
+     * @return $this
+     */
+    public function addAgency(Agency $agency)
+    {
+        $agency->team()->associate($this);
+        $agency->save();
 
         return $this;
     }
