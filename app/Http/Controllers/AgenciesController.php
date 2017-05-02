@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Loops\Models\Agency;
 use Loops\Models\Team;
 use Loops\Models\Contact;
-use App\Loops\Models\Agency;
 use Illuminate\Http\Request;
 
 class AgenciesController extends Controller

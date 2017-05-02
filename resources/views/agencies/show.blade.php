@@ -50,7 +50,7 @@
                         <div class="col-md-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading clearfix">
-                                    <h2 class="panel-title">{{ $contact->name }}</h2>
+                                    <h2 class="panel-title">{{ $contact->name }} {{$loop->first?'(primary)':''}}</h2>
                                 </div>
                                 <div class="panel-body">
                                     <ul class="project-loops">
