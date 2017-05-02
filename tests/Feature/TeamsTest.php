@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Loops\Models\Team;
 use Tests\TestCase;
+use Loops\Models\Team;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class TeamsTest extends TestCase
 {

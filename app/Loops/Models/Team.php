@@ -2,8 +2,8 @@
 
 namespace Loops\Models;
 
-use App\Loops\Models\Agency;
 use App\User;
+use App\Loops\Models\Agency;
 
 class Team extends UuidModel
 {

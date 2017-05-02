@@ -2,11 +2,11 @@
 
 namespace Loops\Models;
 
-use App\Loops\Models\Agency;
 use App\User;
-use Loops\Traits\HasContacts;
 use Loops\Traits\HasNotes;
+use App\Loops\Models\Agency;
 use Loops\Traits\HasNuggets;
+use Loops\Traits\HasContacts;
 
 class Project extends UuidModel
 {
