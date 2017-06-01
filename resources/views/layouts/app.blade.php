@@ -37,7 +37,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <span class="glyphicon glyphicon-refresh"></span>Loops
+                        <span class="glyphicon glyphicon-refresh"></span>Loops !!!
                     </a>
                 </div>
 
