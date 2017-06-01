@@ -88,7 +88,7 @@ class LoopsController extends Controller
 
     public function assignedToUser(Request $request)
     {
-        $selectedUser = User::find($request->user) ?? null;
+        $selectedUser = User::find($request->user) ? User::find($request->user) : null;
         $projects = Team::getFromSession()->projects()->loopsByUser($selectedUser)->openLoops()->get();
 
         return view('loops.assigned-to-user', compact('selectedUser', 'projects'));

@@ -26,7 +26,7 @@ trait HasNotes
      */
     public function addNote(Note $note, User $author = null)
     {
-        $note->author()->associate($author ?? Auth::user());
+        $note->author()->associate($author ? $author : Auth::user());
         $note->notable()->associate($this);
         $note->save();
 

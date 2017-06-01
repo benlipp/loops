@@ -88,7 +88,7 @@ class Team extends UuidModel
 
     public static function getFromSession()
     {
-        $team_id = \Session::get('team_id') ?? \Auth::user()->teams()->first()->id;
+        $team_id = \Session::get('team_id') ? \Session::get('team_id') : \Auth::user()->teams()->first()->id;
 
         return self::find($team_id);
     }

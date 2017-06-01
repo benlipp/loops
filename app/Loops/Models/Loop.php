@@ -82,7 +82,7 @@ class Loop extends UuidModel
 
     public function scopeAssignedToUser($query, User $user = null)
     {
-        return $query->where('user_id', $user->id ?? null);
+        return $query->where('user_id', $user->id ? $user->id : null);
     }
 
     /**
