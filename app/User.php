@@ -91,4 +91,9 @@ class User extends Authenticatable
     {
         return $this->projects()->get();
     }
+
+    public function routeNotificationForSlack()
+    {
+        return 'https://hooks.slack.com/services/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';
+    }
 }

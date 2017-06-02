@@ -9,9 +9,12 @@ use Loops\Models\Team;
 use Loops\Models\Nugget;
 use Loops\Models\Project;
 use Illuminate\Http\Request;
+use App\Notifications\LoopCreated;
+
 
 class LoopsController extends Controller
 {
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -26,6 +29,8 @@ class LoopsController extends Controller
         $loop->open(new Note([
             'body' => $request->note,
         ]));
+
+        $request->user()->notify(new LoopCreated($loop));
 
         return response()->json([
             'url' => route('loop-show', ['loop' => $loop]),
