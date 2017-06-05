@@ -10,6 +10,7 @@ use Loops\Models\Nugget;
 use Loops\Models\Project;
 use Illuminate\Http\Request;
 use App\Notifications\LoopCreated;
+use App\Notifications\LoopClosed;
 use App\Notifications\NoteCreated;
 
 class LoopsController extends Controller
@@ -65,6 +66,8 @@ class LoopsController extends Controller
         $loop->close(new Note([
             'body' => $request->note,
         ]));
+
+        $request->user()->notify(new LoopClosed($loop));
 
         return back()->with('status', 'Saved');
     }
