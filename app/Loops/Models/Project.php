@@ -106,4 +106,13 @@ class Project extends UuidModel
     {
         return $this->notes()->first();
     }
+
+    /**
+     * Get the Project description.
+     * @return \Loops\Models\Note
+     */
+    public function getLatestNoteAttribute()
+    {
+        return $this->notes->last();
+    }
 }

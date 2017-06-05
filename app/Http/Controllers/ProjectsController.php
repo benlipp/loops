@@ -43,6 +43,8 @@ class ProjectsController extends Controller
             ]));
         }
 
+        $request->user()->notify(new \App\Notifications\ProjectCreated($project));
+
         return redirect()->route('project-show', ['project' => $project]);
     }
 
