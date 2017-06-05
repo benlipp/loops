@@ -9,8 +9,8 @@ use Loops\Models\Team;
 use Loops\Models\Nugget;
 use Loops\Models\Project;
 use Illuminate\Http\Request;
-use App\Notifications\LoopCreated;
 use App\Notifications\LoopClosed;
+use App\Notifications\LoopCreated;
 use App\Notifications\NoteCreated;
 
 class LoopsController extends Controller
