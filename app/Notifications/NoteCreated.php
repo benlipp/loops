@@ -9,7 +9,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Log;
 
-class LoopCreated extends Notification
+class NoteCreated extends Notification
 {
     use Queueable;
 
@@ -44,12 +44,12 @@ class LoopCreated extends Notification
                     ->from("Loops")
                     ->to('#sil-loops')
                     ->image('http://images4.static-bluray.com/reviews/902_1.jpg')
-                    ->content('Loop Created: '.$loop->project->name.' - '.$loop->name)
+                    ->content('Note Created: '.$loop->project->name.' - '.$loop->name)
                     ->attachment(function ($attachment) use ($url,$loop) {
                       $attachment->title($loop->name, $url)
                           ->markdown(['fields'])
                           ->fields([
-                            'Description'=>$loop->notes->first()->body
+                            'Description'=>$loop->newest_note->body
                           ]);
                     });
     }

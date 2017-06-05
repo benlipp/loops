@@ -148,6 +148,18 @@ class Loop extends UuidModel
     }
 
     /**
+     * Get the user who opened the note.
+     *
+     * @return mixed
+     */
+    public function getNewestNoteAttribute()
+    {
+        $firstNote = $this->notes()->orderBy('created_at', 'desc')->first();
+
+        return $firstNote;
+    }
+
+    /**
      * @return bool
      */
     public function isOpen()
