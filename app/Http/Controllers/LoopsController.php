@@ -12,10 +12,8 @@ use Illuminate\Http\Request;
 use App\Notifications\LoopCreated;
 use App\Notifications\NoteCreated;
 
-
 class LoopsController extends Controller
 {
-
     public function store(Request $request)
     {
         $this->validate($request, [

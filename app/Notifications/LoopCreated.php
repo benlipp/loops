@@ -2,12 +2,10 @@
 
 namespace App\Notifications;
 
+use Log;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
-use Log;
 
 class LoopCreated extends Notification
 {
@@ -34,22 +32,22 @@ class LoopCreated extends Notification
         return ['slack'];
     }
 
-
     public function toSlack($notifiable)
     {
         Log::info($this->loop);
         $loop = $this->loop;
-        $url = "http://sil-loops.herokuapp.com/loops/".$this->loop->id;
+        $url = 'http://sil-loops.herokuapp.com/loops/'.$this->loop->id;
+
         return (new SlackMessage)
-                    ->from("Loops")
+                    ->from('Loops')
                     ->to('#sil-loops')
                     ->image('http://images4.static-bluray.com/reviews/902_1.jpg')
                     ->content('Loop Created: '.$loop->project->name.' - '.$loop->name)
-                    ->attachment(function ($attachment) use ($url,$loop) {
-                      $attachment->title($loop->name, $url)
+                    ->attachment(function ($attachment) use ($url, $loop) {
+                        $attachment->title($loop->name, $url)
                           ->markdown(['fields'])
                           ->fields([
-                            'Description'=>$loop->notes->first()->body
+                            'Description'=>$loop->notes->first()->body,
                           ]);
                     });
     }
