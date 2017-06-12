@@ -14,7 +14,7 @@ class AddDescriptionToLoop extends Migration
     public function up()
     {
         Schema::table('loops', function($table){
-          $table->text('description')->after('name');
+          $table->text('description')->after('name')->nullable();
         });
 
         $loops = \Loops\Models\Loop::all();
