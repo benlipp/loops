@@ -70,7 +70,9 @@ class LoopsTest extends TestCase
             'status' => 'closed',
         ]);
 
-        $this->loop->open();
+        $this->loop->open(new Note([
+            'body' => 'test note',
+        ]));
         $this->assertEquals('Open', $this->loop->status);
         $this->assertTrue($this->loop->isOpen());
         $this->assertDatabaseHas('loops', [
