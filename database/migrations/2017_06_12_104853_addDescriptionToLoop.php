@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class AddDescriptionToLoop extends Migration
@@ -13,14 +12,14 @@ class AddDescriptionToLoop extends Migration
      */
     public function up()
     {
-        Schema::table('loops', function($table){
-          $table->text('description')->after('name')->nullable();
+        Schema::table('loops', function ($table) {
+            $table->text('description')->after('name')->nullable();
         });
 
         $loops = \Loops\Models\Loop::all();
-        foreach ($loops as $loop){
-          $loop->description = $loop->first_note->body;
-          $loop->save();
+        foreach ($loops as $loop) {
+            $loop->description = $loop->first_note->body;
+            $loop->save();
         }
     }
 
@@ -31,8 +30,8 @@ class AddDescriptionToLoop extends Migration
      */
     public function down()
     {
-      Schema::table('loops', function($table){
-        $table->dropColumn(['description']);
-      });
+        Schema::table('loops', function ($table) {
+            $table->dropColumn(['description']);
+        });
     }
 }
