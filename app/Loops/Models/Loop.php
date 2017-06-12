@@ -3,9 +3,9 @@
 namespace Loops\Models;
 
 use App\User;
+use Parsedown;
 use Loops\Traits\HasNotes;
 use Loops\Traits\HasNuggets;
-use Parsedown;
 
 class Loop extends UuidModel
 {
@@ -165,6 +165,7 @@ class Loop extends UuidModel
     public function getFirstNoteAttribute()
     {
         $firstNote = $this->notes()->orderBy('created_at', 'desc')->first();
+
         return $firstNote;
     }
 
