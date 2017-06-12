@@ -12,6 +12,9 @@
                     <li><strong>Agency: </strong>Loop Agency</li>
                     <li><strong>Client: </strong>Loop Client</li>
                 </ul>
+                <div>
+                    <strong>Descrtiption: </strong> <?=$theLoop->display_description?>
+                </div>
             </div>
             <div class="col-md-4">
                 <ul class="loop-status">

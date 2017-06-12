@@ -5,6 +5,7 @@ namespace Loops\Models;
 use App\User;
 use Loops\Traits\HasNotes;
 use Loops\Traits\HasNuggets;
+use Parsedown;
 
 class Loop extends UuidModel
 {
@@ -99,6 +100,8 @@ class Loop extends UuidModel
             $this->addNote($note, $author);
         }
 
+        $this->description = $note->body;
+
         $this->status = 'open';
         $this->save();
 
@@ -159,6 +162,12 @@ class Loop extends UuidModel
         return $firstNote;
     }
 
+    public function getFirstNoteAttribute()
+    {
+        $firstNote = $this->notes()->orderBy('created_at', 'desc')->first();
+        return $firstNote;
+    }
+
     /**
      * @return bool
      */
@@ -173,5 +182,27 @@ class Loop extends UuidModel
     public function isClosed()
     {
         return $this->attributes['status'] === 'closed';
+    }
+
+    /**
+     * Get the parsed markdown.
+     * @return string
+     */
+    public function getDisplayBodyAttribute()
+    {
+        $parsedown = new Parsedown();
+
+        return $parsedown->text($this->attributes['body']);
+    }
+
+    /**
+     * Get the parsed markdown.
+     * @return string
+     */
+    public function getDisplayDescriptionAttribute()
+    {
+        $parsedown = new Parsedown();
+
+        return $parsedown->setBreaksEnabled(true)->text($this->attributes['description']);
     }
 }

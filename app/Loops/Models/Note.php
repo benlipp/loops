@@ -35,6 +35,6 @@ class Note extends UuidModel
     {
         $parsedown = new Parsedown();
 
-        return $parsedown->text($this->attributes['body']);
+        return $parsedown->setBreaksEnabled(true)->text($this->attributes['body']);
     }
 }
